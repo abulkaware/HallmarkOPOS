@@ -1,0 +1,40 @@
+== uniCenta oPOS 3.56 ==
+2 December 2013
+
+
+uniCenta oPOS Touch Friendly Point of Sale.
+
+
+This is a Production version build of uniCenta oPOS
+uniCenta oPOS v3.56 requires the latest Java Runtime (JRE) version 7.2x 
+Please make sure this is up-to-date before running uniCenta oPOS
+
+This version is a bug fix for and replaces the previous 3.55 version.
+If you want to upgrade from v3.50 you must first run v3.55 and then this upgrade.
+If you attempt an upgrade on an earlier version than 3.50 you will receive errors.
+
+Minimum screen resolution 800x600 pixels required (no maximum)
+ESC/Java POS and SurePOS ticket printers - Serial only
+2 line x 20chr per line Customer Displays - Serial only
+Magnetic Card Readers - Generic, Keyboard and Intelligent
+Barcode Scanners - Scanpal2 or compatible
+Weighing Scales - CASIO, Dialog and SamsungESP protocols or compatible
+
+Supported Databases:
+Apache Derby Embedded (default)
+Apache Derby Client/Server
+HSQLDB
+MySQL
+Oracle 11g Express
+PostgreSQL
+
+
+You can access the latest Release Notes, Manuals and Installation instructions at;
+http://www.unicenta.com or http://www.sourceforge.net/projects/unicentaopos/
+
+
+Visit uniCenta's Sourceforge Community Forums:
+http://www.sourceforge.net/projects/unicentaopos
+
+
+
