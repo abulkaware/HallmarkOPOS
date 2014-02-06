@@ -158,6 +158,8 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         txtCity.setText(null);
         txtRegion.setText(null);
         txtCountry.setText(null);
+        jTextSMS.setText(null);
+        jTextSMS.setEnabled(false);
         
         m_jTaxID.setEnabled(false);
         m_jSearchkey.setEnabled(false);
@@ -227,6 +229,9 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         chkReceiveSMS.setSelected(true);
         chkReceiveEmail.setSelected(true);
         chkReceivePost.setSelected(true);
+        
+        jTextSMS.setText(null);
+        jTextSMS.setEnabled(true);
         
         m_jTaxID.setEnabled(true);
         m_jSearchkey.setEnabled(true);
@@ -329,6 +334,8 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         txtRegion.setEnabled(false);
         txtCountry.setEnabled(false);
         
+        jTextSMS.setEnabled(false);
+        
         m_jCategory.setEnabled(false);
         
         jButton2.setEnabled(false);
@@ -405,6 +412,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         txtCity.setEnabled(true);
         txtRegion.setEnabled(true);
         txtCountry.setEnabled(true);
+        jTextSMS.setEnabled(true);
         
         m_jCategory.setEnabled(true);
         
@@ -592,6 +600,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextSMS = new javax.swing.JTextArea();
         jButtonSendSMS = new javax.swing.JButton();
+        jButtonClearSMS = new javax.swing.JButton();
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText(AppLocal.getIntString("label.taxid")); // NOI18N
@@ -980,6 +989,22 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jScrollPane3.setViewportView(jTextSMS);
 
         jButtonSendSMS.setText(bundle.getString("label.btnSendSMS")); // NOI18N
+        jButtonSendSMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendSMS_actionPerformed(evt);
+            }
+        });
+
+        jButtonClearSMS.setText("jButton1");
+        jButtonClearSMS.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jButton_ClearSMS(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -987,8 +1012,11 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSendSMS)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButtonClearSMS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSendSMS))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -997,7 +1025,9 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSendSMS)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSendSMS)
+                    .addComponent(jButtonClearSMS))
                 .addGap(0, 45, Short.MAX_VALUE))
         );
 
@@ -1119,6 +1149,29 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private void jTabbedPane1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1PropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane1PropertyChange
+
+    private void sendSMS_actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendSMS_actionPerformed
+        if (txtPhone2.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "No mobile number is set for this customer.");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to send this message?", "Send SMS?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {            
+            if (com.openbravo.beans.SMSUtils.SendText(jTextSMS.getText(), txtPhone2.getText()))
+            {
+                JOptionPane.showMessageDialog(this, "SMS sent.");
+                jTextSMS.setText(null);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Error sending SMS message.");
+            }
+        }
+    }//GEN-LAST:event_sendSMS_actionPerformed
+
+    private void jButton_ClearSMS(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jButton_ClearSMS
+        jTextSMS.setText(null);
+    }//GEN-LAST:event_jButton_ClearSMS
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1127,6 +1180,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private javax.swing.JCheckBox chkReceiveSMS;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonClearSMS;
     private javax.swing.JButton jButtonSendSMS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

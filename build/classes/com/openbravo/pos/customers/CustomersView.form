@@ -1009,8 +1009,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButtonSendSMS" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonClearSMS" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonSendSMS" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jScrollPane3" min="-2" pref="480" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -1022,7 +1026,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane3" min="-2" pref="102" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButtonSendSMS" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonSendSMS" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonClearSMS" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1050,6 +1057,17 @@
                   <ResourceString bundle="pos_messages.properties" key="label.btnSendSMS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendSMS_actionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonClearSMS">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jButton1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jButton_ClearSMS"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
