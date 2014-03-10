@@ -323,15 +323,15 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 // Added JDL change the startup state of addtax button
           m_jaddtax.setSelected((Boolean.valueOf(m_App.getProperties().getProperty("till.taxincluded")).booleanValue()));  
            
-
+          // CB: Tax isn't editable.
         // Show taxes options
-        if (m_App.getAppUserView().getUser().hasPermission("sales.ChangeTaxOptions")) {
-            m_jTax.setVisible(true);
-            m_jaddtax.setVisible(true);
-        } else {
+//        if (m_App.getAppUserView().getUser().hasPermission("sales.ChangeTaxOptions")) {
+//            m_jTax.setVisible(true);
+//            m_jaddtax.setVisible(true);
+//        } else {
             m_jTax.setVisible(false);
             m_jaddtax.setVisible(false);
-        }
+//        }
 
         // Authorization for buttons
         btnSplit.setEnabled(m_App.getAppUserView().getUser().hasPermission("sales.Total"));
@@ -1991,6 +1991,11 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
         m_jTax.setFocusable(false);
         m_jTax.setPreferredSize(new java.awt.Dimension(28, 25));
         m_jTax.setRequestFocusEnabled(false);
+        m_jTax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jTaxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -2258,6 +2263,10 @@ m_App.getAppUserView().showTask("com.openbravo.pos.customers.CustomersPanel");
                 }    
 
     }//GEN-LAST:event_j_btnKitchenPrtActionPerformed
+
+    private void m_jTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jTaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_jTaxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -28,13 +28,10 @@
 </display>
 
 <ticket>
-	<image>Printer.Ticket.Logo</image>
-	<line></line>
-
-	<line><text align="center" length="42">uniCenta oPOS</text></line>
-	<line><text align="center" length="42">Touch Friendly Point Of Sale</text></line>
-	<line><text align="center" length="42">Copyright (c) 2009-2013 uniCenta</text></line>
-	<line><text align="center" length="42">Printer.Ticket</text></line>
+	<line><text align="center" length="42">15 South Street</text></line>
+	<line><text align="center" length="42">Titchfield, Fareham</text></line>
+	<line><text align="center" length="42">PO14 4DL</text></line>
+	<line><text align="center" length="42">01329 847187</text></line>
 	<line></line>
 
 	#if (${ticket.ticketType} == 0)

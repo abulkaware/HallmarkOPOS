@@ -36,13 +36,13 @@ import javax.swing.ListCellRenderer;
  *
  * @author adrianromero
  */
-public class CustomersPanel extends JPanelTable {
+public class CustomersPanelDownload extends JPanelTable {
     
     private TableDefinition tcustomers;
     private CustomersView jeditor;
     
     /** Creates a new instance of CustomersPanel */
-    public CustomersPanel() {    
+    public CustomersPanelDownload() {    
     }
     
     @Override
@@ -91,6 +91,6 @@ public class CustomersPanel extends JPanelTable {
     
     @Override
     public String getTitle() {
-        return AppLocal.getIntString("Menu.CustomersManagement");
+        return AppLocal.getIntString("Menu.CustomersDownload");
     }    
 }
