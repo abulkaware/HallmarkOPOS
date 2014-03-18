@@ -31,6 +31,7 @@ import com.openbravo.pos.sales.TaxesLogic;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.UUID;
@@ -936,7 +937,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText(AppLocal.getIntString("label.prodref")); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 65, 25);
+        jLabel1.setBounds(10, 40, 65, 25);
 
         m_jRef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jRef.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -945,25 +946,25 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
         });
         jPanel1.add(m_jRef);
-        m_jRef.setBounds(130, 10, 80, 25);
+        m_jRef.setBounds(130, 40, 80, 25);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText(AppLocal.getIntString("label.prodbarcode")); // NOI18N
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 40, 110, 25);
+        jLabel6.setBounds(10, 70, 110, 25);
 
         m_jCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jPanel1.add(m_jCode);
-        m_jCode.setBounds(130, 40, 170, 25);
+        m_jCode.setBounds(130, 70, 170, 25);
 
         m_jCodetype.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jPanel1.add(m_jCodetype);
-        m_jCodetype.setBounds(310, 40, 90, 25);
+        m_jCodetype.setBounds(310, 70, 90, 25);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText(AppLocal.getIntString("label.prodname")); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 70, 100, 25);
+        jLabel2.setBounds(10, 100, 100, 25);
 
         m_jName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jName.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -972,16 +973,21 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             }
         });
         jPanel1.add(m_jName);
-        m_jName.setBounds(130, 70, 270, 25);
+        m_jName.setBounds(130, 100, 270, 25);
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText(AppLocal.getIntString("label.prodcategory")); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 100, 110, 25);
+        jLabel5.setBounds(10, 10, 110, 25);
 
         m_jCategory.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        m_jCategory.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                categorySelected(evt);
+            }
+        });
         jPanel1.add(m_jCategory);
-        m_jCategory.setBounds(130, 100, 170, 25);
+        m_jCategory.setBounds(130, 10, 170, 25);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText(AppLocal.getIntString("label.attributes")); // NOI18N
@@ -1158,7 +1164,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jService.setToolTipText("A Service Item will not be deducted from the Inventory");
         jPanel2.add(m_jService);
         m_jService.setBounds(160, 90, 30, 25);
-        m_jService.getAccessibleContext().setAccessibleDescription(null);
+        m_jService.getAccessibleContext().setAccessibleDescription("null");
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText(AppLocal.getIntString("label.prodaux")); // NOI18N
@@ -1247,7 +1253,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jPanel4.add(jLabel17);
         jLabel17.setBounds(10, 200, 330, 100);
         jPanel4.add(jSeparator1);
-        jSeparator1.setBounds(150, 300, 0, 2);
+        jSeparator1.setBounds(150, 300, 0, 12);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -1397,6 +1403,13 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private void jLabel32MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseDragged
  // TODO for later
     }//GEN-LAST:event_jLabel32MouseDragged
+
+    private void categorySelected(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categorySelected
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+          Object item = evt.getItem();
+          
+       }
+    }//GEN-LAST:event_categorySelected
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
