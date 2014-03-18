@@ -47,7 +47,6 @@
 	#if ($ticket.getCustomer())
 		<line><text align="left" length="15">Customer:</text><text>${ticket.getCustomer().printName()}</text></line>
 		<line><text align="left" length="15">Account #:</text><text>${ticket.getCustomer().printTaxid()}</text></line>
-		<line><text align="left" length="15">Current Debt:</text><text>${ticket.getCustomer().printCurDebt()}</text></line>
 	#end
 
 	#if (${tickettext.place} != ${place})
@@ -147,8 +146,8 @@
 
 
 	<line></line>
-	<line><text align="center" length="42">Thank you for your custom</text></line>
-	<line><text align="center" length="42">Please Call Again</text></line>
+	<line><text align="center" length="42">VAT Reg No 568 4366 02</text></line>
+	<line><text align="center" length="42">Please retain as proof of purchase</text></line>
 
 </ticket>
 
