@@ -136,7 +136,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 new Field("ISVERPATRIB", Datas.BOOLEAN, Formats.BOOLEAN),
                 new Field("TEXTTIP", Datas.STRING, Formats.STRING),
 // ADDED JDL 25.05.13 Warranty flag              
-                new Field("WARRANTY", Datas.BOOLEAN, Formats.BOOLEAN)
+                new Field("WARRANTY", Datas.BOOLEAN, Formats.BOOLEAN),
+                new Field("SEQUENCEID", Datas.INT, Formats.NULL)
                 );
 // **        
              
@@ -181,7 +182,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVPRICE, "
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
-                + "WARRANTY "
+                + "WARRANTY, "
+                + "SEQUENCEID "
                 + "FROM PRODUCTS WHERE ID = ?"
 		, SerializerWriteString.INSTANCE
 		, ProductInfoExt.getSerializerRead()).find(id);
@@ -215,7 +217,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVPRICE, "
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
-                + "WARRANTY " 
+                + "WARRANTY, "
+                + "SEQUENCEID "
 		+ "FROM PRODUCTS WHERE CODE = ?"
 		, SerializerWriteString.INSTANCE
 		, ProductInfoExt.getSerializerRead()).find(sCode);
@@ -249,7 +252,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVPRICE, "
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
-                + "WARRANTY "
+                + "WARRANTY, "
+                + "SEQUENCEID "
 		+ "FROM PRODUCTS WHERE REFERENCE = ?"
 		, SerializerWriteString.INSTANCE
 		, ProductInfoExt.getSerializerRead()).find(sReference);
@@ -316,7 +320,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "P.ISVPRICE, "
                 + "P.ISVERPATRIB, "
                 + "P.TEXTTIP, "
-                + "P.WARRANTY  "
+                + "P.WARRANTY, "
+                + "P.SEQUENCEID "
 		+ "FROM PRODUCTS P, PRODUCTS_CAT O WHERE P.ID = O.PRODUCT AND P.CATEGORY = ? " +
 //		  "ORDER BY O.CATORDER, P.NAME " +
 //                  "LIMIT 3000 "
@@ -353,7 +358,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "P.ISVPRICE, "
                 + "P.ISVERPATRIB, "
                 + "P.TEXTTIP, "
-                + "P.WARRANTY  "
+                + "P.WARRANTY, "
+                + "P.SEQUENCEID "
                 + "FROM PRODUCTS P, "
                 + "PRODUCTS_CAT O, PRODUCTS_COM M "
                 + "WHERE P.ID = O.PRODUCT AND P.ID = M.PRODUCT2 AND M.PRODUCT = ? "
@@ -417,6 +423,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 , null
                 , new SerializerReadClass(PromoTypeInfo.class));
         }
+        
 // End of Promotion
         
   public final CategoryInfo getCategoryInfo(String id) throws BasicException {
@@ -465,7 +472,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVPRICE, "
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
-                + "WARRANTY " 
+                + "WARRANTY, "
+                + "SEQUENCEID " 
                 + "FROM PRODUCTS "
                 + "WHERE ?(QBF_FILTER) "
                 + "ORDER BY REFERENCE", 
@@ -510,7 +518,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVPRICE, "
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
-                + "WARRANTY "
+                + "WARRANTY, "
+                + "SEQUENCEID "
 		+ "FROM PRODUCTS "
                 + "WHERE ISCOM = " + s.DB.FALSE() + " AND ?(QBF_FILTER) ORDER BY REFERENCE",
                 new String[] {"NAME", "PRICEBUY", "PRICESELL", "CATEGORY", "CODE"})
@@ -554,7 +563,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                  + "ISVPRICE, "
                  + "ISVERPATRIB, "
                  + "TEXTTIP, "
-                 + "WARRANTY "
+                 + "WARRANTY, "
+                 + "SEQUENCEID "
 		 + "FROM PRODUCTS "
                  + "WHERE ISCOM = " + s.DB.TRUE() + " AND ?(QBF_FILTER) "
                  + "ORDER BY REFERENCE", new String[] {"NAME", "PRICEBUY", "PRICESELL", "CATEGORY", "CODE"})
@@ -1109,6 +1119,8 @@ public void writeValues() throws BasicException {
     public final Integer getNextTicketPaymentIndex() throws BasicException {
         return (Integer) s.DB.getSequenceSentence(s, "TICKETSNUM_PAYMENT").find();
     }
+   
+    
 
 // ADDED JG 20.12.10 ISKITCHEN - Kitchen Print + 25.06.2011 ISSERVICE - ISSERVICE
 // ADDED JG 13 NOV 12 DISPLAY - Button display text for HTML rendering***
@@ -1121,13 +1133,13 @@ public void writeValues() throws BasicException {
     public final SentenceList getProductCatQBF() {
  	return new StaticSentence(s
 		, new QBFBuilder(
-			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.ATTRIBUTESET_ID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY " +
+			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.ATTRIBUTESET_ID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY, P.SEQUENCEID " +
 			"FROM PRODUCTS P LEFT OUTER JOIN PRODUCTS_CAT C ON P.ID = C.PRODUCT " +
 			"WHERE ?(QBF_FILTER) " +
 			"ORDER BY P.REFERENCE", new String[] {"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
 		, new SerializerWriteBasic(new Datas[] {Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING})
 		, productsRow.getSerializerRead());
-    }
+    }   
 
 // ADDED JG 20.12.10 ISKITCHEN - Kitchen Print + 25.06.2011 ISSERVICE - ISSERVICE
 // ADDED JG 13 NOV 12 DISPLAY - Button display text for HTML rendering***
@@ -1142,8 +1154,8 @@ public void writeValues() throws BasicException {
 		public int execInTransaction(Object params) throws BasicException {
 			Object[] values = (Object[]) params;
 			int i = new PreparedSentence(s
-				, "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, ATTRIBUTESET_ID, IMAGE, STOCKCOST, STOCKVOLUME, ATTRIBUTES, ISKITCHEN, ISSERVICE, DISPLAY, ISVPRICE, ISVERPATRIB, TEXTTIP, WARRANTY) VALUES (?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-				, new SerializerWriteBasicExt(productsRow.getDatas(), new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23})).exec(params);
+				, "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, ATTRIBUTESET_ID, IMAGE, STOCKCOST, STOCKVOLUME, ATTRIBUTES, ISKITCHEN, ISSERVICE, DISPLAY, ISVPRICE, ISVERPATRIB, TEXTTIP, WARRANTY, SEQUENCEID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+				, new SerializerWriteBasicExt(productsRow.getDatas(), new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24})).exec(params);
 			if (i > 0 && ((Boolean)values[14]).booleanValue()) {
 				return new PreparedSentence(s
 					, "INSERT INTO PRODUCTS_CAT (PRODUCT, CATORDER) VALUES (?, ?)"
@@ -1294,6 +1306,23 @@ public void writeValues() throws BasicException {
 
         Double d = (Double) p.find(warehouse, id, attsetinstid);
         return d == null ? 0.0 : d.doubleValue();
+    }
+    
+    public final Integer findNextProductCategorySequence(String categoryId) throws BasicException {
+        
+        PreparedSentence p = new PreparedSentence(s, "select sequenceid + 1"
+                + " from products p"
+                + " where NOT EXISTS ("
+                + " select null from products pi"
+                + " where pi.sequenceid = p.sequenceid + 1 and pi.category = ? )"
+                + " and p.category = ?"
+                + " order by p.sequenceid limit 1"
+                , new SerializerWriteBasic(Datas.STRING, Datas.STRING)
+                , SerializerReadInteger.INSTANCE);
+        Integer next = (Integer)p.find(categoryId, categoryId);
+        return next == null ? 0 : next;
+        //CB: id in this case is the category id
+        
     }
 
     public final SentenceExec getCatalogCategoryAdd() {

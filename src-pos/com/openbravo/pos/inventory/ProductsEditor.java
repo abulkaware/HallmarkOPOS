@@ -64,10 +64,15 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private boolean priceselllock = false;
 
     private boolean reportlock = false;
+    private boolean addingNew = false;
+    
+    private DataLogicSales dlSales;
 
     /** Creates new form JEditProduct */
     public ProductsEditor(DataLogicSales dlSales, DirtyManager dirty) {
         initComponents();
+        
+        this.dlSales = dlSales;
 
         // Taxes sentence
         taxsent = dlSales.getTaxList();
@@ -90,6 +95,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_CodetypeModel.add(CodeType.CODE128);
         m_jCodetype.setModel(m_CodetypeModel);
         m_jCodetype.setVisible(false);
+        m_jRefSequenceId.setVisible(false);
 
         m_jRef.getDocument().addDocumentListener(dirty);
         m_jCode.getDocument().addDocumentListener(dirty);
@@ -252,6 +258,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     public void writeValueInsert() {
 
         reportlock = true;
+        addingNew = true;
 
         m_jTitle.setText(AppLocal.getIntString("label.recordnew"));
         m_id = UUID.randomUUID().toString();
@@ -511,7 +518,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     @Override
     public Object createValue() throws BasicException {
 
-        Object[] myprod = new Object[24];
+        Object[] myprod = new Object[25];
         myprod[0] = m_id;
         myprod[1] = m_jRef.getText();
         myprod[2] = m_jCode.getText();
@@ -544,7 +551,11 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 // Added JDL 09.04.13
        myprod[22] = m_jTextTip.getText();
 // ADDed JDL 26.05.13        
-       myprod[23] = Boolean.valueOf(m_jCheckWarrantyReceipt.isSelected());   
+       myprod[23] = Boolean.valueOf(m_jCheckWarrantyReceipt.isSelected());
+       
+       //CB:
+       myprod[24] = Formats.INT.parseValue(m_jRefSequenceId.getText());
+       addingNew = false;
         return myprod;
         
         
@@ -566,10 +577,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             
             if (m_jRef == null) {
                 //m_jCode.setText("0123456789012");
-                m_jCode.setText(Long.toString(lDateTime));
+                m_jName.setText(Long.toString(lDateTime));
             } else {
-                if (m_jCode.getText()==null || "".equals(m_jCode.getText())){
-                m_jCode.setText(m_jRef.getText());}
+                if (m_jName.getText()==null || "".equals(m_jName.getText())){
+                m_jName.setText(m_jRef.getText() + " - ");}
             }
             reportlock = false;
         }
@@ -880,6 +891,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jCheckWarrantyReceipt = new javax.swing.JCheckBox();
         m_jGrossProfit = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
+        m_jRefSequenceId = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         m_jstockcost = new javax.swing.JTextField();
@@ -1105,6 +1117,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel22.setText(bundle.getString("label.grossprofit")); // NOI18N
         jPanel1.add(jLabel22);
         jLabel22.setBounds(370, 220, 90, 20);
+
+        m_jRefSequenceId.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPanel1.add(m_jRefSequenceId);
+        m_jRefSequenceId.setBounds(230, 40, 80, 25);
 
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodgeneral"), jPanel1); // NOI18N
 
@@ -1405,10 +1421,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     }//GEN-LAST:event_jLabel32MouseDragged
 
     private void categorySelected(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categorySelected
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-          Object item = evt.getItem();
-          
-       }
+        
+            if (evt.getStateChange() == ItemEvent.SELECTED && addingNew) {
+                
+                Integer nextId = 0;
+                try {  
+                   nextId = dlSales.findNextProductCategorySequence(m_CategoryModel.getSelectedKey().toString());
+                } catch (BasicException ex) {}
+
+                m_jRefSequenceId.setText(nextId.toString());
+                String formattedId = String.format("%04d", nextId);
+                m_jRef.setText(formattedId);
+            }
+        
     }//GEN-LAST:event_categorySelected
 
     
@@ -1472,6 +1497,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private javax.swing.JTextField m_jPriceSell;
     private javax.swing.JTextField m_jPriceSellTax;
     private javax.swing.JTextField m_jRef;
+    private javax.swing.JTextField m_jRefSequenceId;
     private javax.swing.JCheckBox m_jScale;
     private javax.swing.JCheckBox m_jService;
     private javax.swing.JComboBox m_jTax;

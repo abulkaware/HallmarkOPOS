@@ -60,6 +60,9 @@ public class JTicketsBagShared extends JTicketsBag {
         
         // Authorisation
         m_jDelTicket.setEnabled(m_App.getAppUserView().getUser().hasPermission("com.openbravo.pos.sales.JPanelTicketEdits"));
+        
+        m_jNewTicket.setVisible(false);
+        m_jListTickets.setVisible(false);
        
     }
     
@@ -71,7 +74,8 @@ public class JTicketsBagShared extends JTicketsBag {
         
         m_sCurrentTicket = null;
         m_panelticket.setActiveTicket(null, null);       
-        
+        m_jNewTicket.setVisible(false);
+        m_jListTickets.setVisible(false);
         return true;
         
         // postcondicion es que no tenemos ticket activado ni ticket en el panel

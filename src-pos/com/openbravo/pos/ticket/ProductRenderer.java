@@ -20,6 +20,7 @@
 package com.openbravo.pos.ticket;
 
 import com.openbravo.format.Formats;
+import com.openbravo.pos.sales.TaxesLogic;
 import com.openbravo.pos.util.ThumbNailBuilder;
 import java.awt.*;
 import javax.swing.*;
@@ -41,10 +42,13 @@ public class ProductRenderer extends DefaultListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         super.getListCellRendererComponent(list, null, index, isSelected, cellHasFocus);
-        
         ProductInfoExt prod = (ProductInfoExt) value;
+        //CB: TODO fix the hard-coded tax value (i.e. multiplier by 1.2 to add 20%)
         if (prod != null) {
-            setText("<html>" + prod.getReference() + " - " + prod.getName() + "<br>&nbsp;&nbsp;&nbsp;&nbsp;" + Formats.CURRENCY.formatValue(new Double(prod.getPriceSell())));
+            
+            Double vatInclusivePrice = new Double(prod.getPriceSell()) * new Double(1.2);
+            
+            setText("<html>" + prod.getReference() + " - " + prod.getName() + "<br>&nbsp;&nbsp;&nbsp;&nbsp;" + Formats.CURRENCY.formatValue(vatInclusivePrice));
             Image img = tnbprod.getThumbNail(prod.getImage());
             setIcon(img == null ? null :new ImageIcon(img));
         }
