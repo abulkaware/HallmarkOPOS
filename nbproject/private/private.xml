@@ -3,47 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JPanelButtons.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JTicketLines.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JTicketsBagTicketBag.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/reports/com/openbravo/reports/closedpos.bs</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomersPanelDownload.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/SentenceList.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/TableDefinition.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/SentenceEnum.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JProductAttEditItem.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/InventoryRecord.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/net/proteanit/sql/DbUtils.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/StockModel.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JPanelTable.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/shared/JTicketsBagSharedList.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/ticket/ProductRenderer.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/TaxesLogic.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/forms/DataLogicSales.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JTicketCatalogLines.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/PreparedSentence.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JProductLineEdit.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/ReceiptSplit.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/JDBCSentence.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/JDlgUploadProducts.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/ticket/TicketLineInfo.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/SimpleReceipt.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/BaseSentence.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/InventoryLine.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JProductAttEdit.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/gui/ComboBoxValModel.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomersPanel.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/StockManagement.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/ticket/ProductInfoExt.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JPanelCloseMoney.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JTicketsBagTicket.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JProductAttListItem.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JMooringDetails.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JRefundLines.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/locales/pos_messages.properties</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/loader/QBFBuilder.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JProductFinder.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/AuxiliarEditor.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JPanelPrinter.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JPanelPayments.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ProductsEditor.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/KitchenDisplay.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/ticket/TaxInfo.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/templates/Menu.Root.txt</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/AttributeValuesEditor.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/PaymentsModel.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/shared/JTicketsBagShared.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/catalog/JCatalog.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/CategoriesEditor.java</file>
         </group>
     </open-files>
 </project-private>

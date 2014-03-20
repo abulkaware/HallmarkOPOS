@@ -923,7 +923,12 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
             }
         });
 
-        jButtonClearSMS.setText("jButton1");
+        jButtonClearSMS.setText("Clear");
+        jButtonClearSMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearSMSActionPerformed(evt);
+            }
+        });
         jButtonClearSMS.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -1045,6 +1050,10 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private void jButton_ClearSMS(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jButton_ClearSMS
         jTextSMS.setText(null);
     }//GEN-LAST:event_jButton_ClearSMS
+
+    private void jButtonClearSMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSMSActionPerformed
+        jTextSMS.setText("");
+    }//GEN-LAST:event_jButtonClearSMSActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
