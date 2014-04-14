@@ -118,7 +118,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 new Field(AppLocal.getIntString("label.prodpricesell"), Datas.DOUBLE, Formats.CURRENCY, false, true, true),
                 new Field(AppLocal.getIntString("label.prodcategory"), Datas.STRING, Formats.STRING, false, false, true),
                 new Field(AppLocal.getIntString("label.taxcategory"), Datas.STRING, Formats.STRING, false, false, true),
-                new Field(AppLocal.getIntString("label.attributeset"), Datas.STRING, Formats.STRING, false, false, true),
+                new Field(AppLocal.getIntString("label.supplier"), Datas.STRING, Formats.STRING, false, false, true),
                 new Field("IMAGE", Datas.IMAGE, Formats.NULL),
                 new Field("STOCKCOST", Datas.DOUBLE, Formats.CURRENCY),
                 new Field("STOCKVOLUME", Datas.DOUBLE, Formats.DOUBLE),
@@ -173,7 +173,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "PRICESELL, "
                 + "TAXCAT, "
                 + "CATEGORY, "
-                + "ATTRIBUTESET_ID, "
+                + "SUPPLIERID, "
                 + "IMAGE, "
                 + "ATTRIBUTES, "
                 + "ISKITCHEN, "
@@ -209,7 +209,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "PRICESELL, "
                 + "TAXCAT, "
                 + "CATEGORY, "
-                + "ATTRIBUTESET_ID, "
+                + "SUPPLIERID, "
                 + "IMAGE, ATTRIBUTES, "
                 + "ISKITCHEN, "
                 + "ISSERVICE, "
@@ -243,7 +243,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "PRICESELL, "
                 + "TAXCAT, "
                 + "CATEGORY, "
-                + "ATTRIBUTESET_ID, "
+                + "SUPPLIERID, "
                 + "IMAGE, "
                 + "ATTRIBUTES, "
                 + "ISKITCHEN, "
@@ -311,7 +311,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "P.PRICESELL, "
                 + "P.TAXCAT, "
                 + "P.CATEGORY, "
-                + "P.ATTRIBUTESET_ID, "
+                + "P.SUPPLIERID, "
                 + "P.IMAGE, "
                 + "P.ATTRIBUTES, "
                 + "P.ISKITCHEN, "
@@ -349,7 +349,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "P.PRICESELL, "
                 + "P.TAXCAT, "
                 + "P.CATEGORY, "
-                + "P.ATTRIBUTESET_ID, "
+                + "P.SUPPLIERID, "
                 + "P.IMAGE, "
                 + "P.ATTRIBUTES, "
                 + "P.ISKITCHEN, "
@@ -463,7 +463,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "PRICESELL, "
                 + "TAXCAT, "
                 + "CATEGORY, "
-                + "ATTRIBUTESET_ID, "
+                + "SUPPLIERID, "
                 + "IMAGE, "
                 + "ATTRIBUTES, "
                 + "ISKITCHEN, "
@@ -510,7 +510,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "PRICESELL, "
                 + "TAXCAT, "
                 + "CATEGORY, "
-                + "ATTRIBUTESET_ID, "
+                + "SUPPLIERID, "
                 + "IMAGE, ATTRIBUTES, "
                 + "ISKITCHEN, "
                 + "ISSERVICE, "
@@ -554,7 +554,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                  + "PRICESELL, "
                  + "TAXCAT, "
                  + "CATEGORY, "
-                 + "ATTRIBUTESET_ID, "
+                 + "SUPPLIERID, "
                  + "IMAGE, "
                  + "ATTRIBUTES, "
                  + "ISKITCHEN, "
@@ -733,6 +733,23 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 return new AttributeSetInfo(dr.getString(1), dr.getString(2));
             }});
     }
+    
+    public final SentenceList getSuppliersList() {
+        return new StaticSentence(s
+            , "SELECT "
+                + "ID, "
+                + "NAME "
+                + "FROM SUPPLIERS "
+                + "ORDER BY NAME"
+            , null
+            , new SerializerRead() {@Override
+ public Object readValues(DataRead dr) throws BasicException {
+                return new AttributeSetInfo(dr.getString(1), dr.getString(2));
+            }});
+    }
+    
+    
+    
     public final SentenceList getLocationsList() {
         return new StaticSentence(s
             , "SELECT "
@@ -1133,7 +1150,7 @@ public void writeValues() throws BasicException {
     public final SentenceList getProductCatQBF() {
  	return new StaticSentence(s
 		, new QBFBuilder(
-			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.ATTRIBUTESET_ID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY, P.SEQUENCEID " +
+			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.SUPPLIERID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY, P.SEQUENCEID " +
 			"FROM PRODUCTS P LEFT OUTER JOIN PRODUCTS_CAT C ON P.ID = C.PRODUCT " +
 			"WHERE ?(QBF_FILTER) " +
 			"ORDER BY P.REFERENCE", new String[] {"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
@@ -1154,7 +1171,7 @@ public void writeValues() throws BasicException {
 		public int execInTransaction(Object params) throws BasicException {
 			Object[] values = (Object[]) params;
 			int i = new PreparedSentence(s
-				, "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, ATTRIBUTESET_ID, IMAGE, STOCKCOST, STOCKVOLUME, ATTRIBUTES, ISKITCHEN, ISSERVICE, DISPLAY, ISVPRICE, ISVERPATRIB, TEXTTIP, WARRANTY, SEQUENCEID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+				, "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, SUPPLIERID, IMAGE, STOCKCOST, STOCKVOLUME, ATTRIBUTES, ISKITCHEN, ISSERVICE, DISPLAY, ISVPRICE, ISVERPATRIB, TEXTTIP, WARRANTY, SEQUENCEID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 				, new SerializerWriteBasicExt(productsRow.getDatas(), new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24})).exec(params);
 			if (i > 0 && ((Boolean)values[14]).booleanValue()) {
 				return new PreparedSentence(s
@@ -1173,7 +1190,7 @@ public void writeValues() throws BasicException {
 		public int execInTransaction(Object params) throws BasicException {
 			Object[] values = (Object[]) params;
 			int i = new PreparedSentence(s
-				, "UPDATE PRODUCTS SET ID = ?, REFERENCE = ?, CODE = ?, NAME = ?, ISCOM = ?, ISSCALE = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, ATTRIBUTESET_ID = ?, IMAGE = ?, STOCKCOST = ?, STOCKVOLUME = ?, ATTRIBUTES = ?, ISKITCHEN = ?, ISSERVICE = ?, DISPLAY = ?, ISVPRICE = ?, ISVERPATRIB = ?, TEXTTIP = ?, WARRANTY = ? WHERE ID = ?"
+				, "UPDATE PRODUCTS SET ID = ?, REFERENCE = ?, CODE = ?, NAME = ?, ISCOM = ?, ISSCALE = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, SUPPLIERID = ?, IMAGE = ?, STOCKCOST = ?, STOCKVOLUME = ?, ATTRIBUTES = ?, ISKITCHEN = ?, ISSERVICE = ?, DISPLAY = ?, ISVPRICE = ?, ISVERPATRIB = ?, TEXTTIP = ?, WARRANTY = ? WHERE ID = ?"
 				, new SerializerWriteBasicExt(productsRow.getDatas(), new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 0})).exec(params);
 			if (i > 0) {
 				if (((Boolean)values[14]).booleanValue()) {
