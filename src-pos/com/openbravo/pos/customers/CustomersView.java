@@ -67,12 +67,8 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         initComponents(); 
         
         m_Dirty = dirty;
-        m_jTaxID.getDocument().addDocumentListener(dirty);
-        m_jSearchkey.getDocument().addDocumentListener(dirty);
-        m_jName.getDocument().addDocumentListener(dirty);        
         m_jNotes.getDocument().addDocumentListener(dirty);
         //txtMaxdebt.getDocument().addDocumentListener(dirty);
-        m_jVisible.addActionListener(dirty);
         
         txtFirstName.getDocument().addDocumentListener(dirty);
         txtLastName.getDocument().addDocumentListener(dirty);
@@ -115,16 +111,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     @Override
     public void writeValueEOF() {
         m_oId = null;
-        m_jTaxID.setText(null);
-        m_jSearchkey.setText(null);
-        m_jName.setText(null);
         m_jNotes.setText(null);
-
-        //txtMaxdebt.setText(null);
-        //txtCurdebt.setText(null);
-        //txtCurdate.setText(null);
-        m_jVisible.setSelected(false);
-        //jcard.setText(null);
         
         txtFirstName.setText(null);
         txtLastName.setText(null);
@@ -147,13 +134,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         txtCountry.setText(null);
         jTextSMS.setText(null);
         jTextSMS.setEnabled(false);
-        
-        m_jTaxID.setEnabled(false);
-        m_jSearchkey.setEnabled(false);
-        m_jName.setEnabled(false);
-
-        m_jVisible.setEnabled(false);
-        
+         
         txtFirstName.setEnabled(false);
         txtLastName.setEnabled(false);
         txtEmail.setEnabled(false);
@@ -177,11 +158,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     @Override
     public void writeValueInsert() {
         m_oId = null;
-        m_jTaxID.setText(null);
-        m_jSearchkey.setText(null);
-        m_jName.setText(null);
         m_jNotes.setText(null);
-        m_jVisible.setSelected(true);
         
         txtFirstName.setText(null);
         txtLastName.setText(null);
@@ -203,11 +180,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jTextSMS.setText(null);
         jTextSMS.setEnabled(true);
         
-        m_jTaxID.setEnabled(true);
-        m_jSearchkey.setEnabled(true);
-        m_jName.setEnabled(false);
         m_jNotes.setEnabled(true);
-        m_jVisible.setEnabled(true);
                
         txtFirstName.setEnabled(true);
         txtLastName.setEnabled(true);
@@ -235,13 +208,8 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
 
         Object[] customer = (Object[]) value;
         m_oId = customer[0];
-        m_jTaxID.setText((String) customer[1]);
-        m_jSearchkey.setText((String) customer[2]);
-        m_jName.setText((String) customer[3]);
         m_jNotes.setText((String) customer[4]);
-        m_jVisible.setSelected(((Boolean) customer[5]).booleanValue());
        
-        
         txtFirstName.setText(Formats.STRING.formatValue(customer[10]));
         txtLastName.setText(Formats.STRING.formatValue(customer[11]));
         txtEmail.setText(Formats.STRING.formatValue(customer[12]));
@@ -262,11 +230,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         chkReceiveEmail.setSelected(((Boolean) customer[25]).booleanValue());
         chkReceivePost.setSelected(((Boolean) customer[26]).booleanValue());
         
-        m_jTaxID.setEnabled(false);
-        m_jSearchkey.setEnabled(false);
-        m_jName.setEnabled(false);
         m_jNotes.setEnabled(false);
-        m_jVisible.setEnabled(false);
         
         txtFirstName.setEnabled(false);
         txtLastName.setEnabled(false);
@@ -298,11 +262,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     public void writeValueEdit(Object value) {
         Object[] customer = (Object[]) value;
         m_oId = customer[0];
-        m_jTaxID.setText((String) customer[1]);
-        m_jSearchkey.setText((String) customer[2]);
-        m_jName.setText((String) customer[3]);
         m_jNotes.setText((String) customer[4]);
-        m_jVisible.setSelected(((Boolean) customer[5]).booleanValue());
         
         txtFirstName.setText(Formats.STRING.formatValue(customer[10]));
         txtLastName.setText(Formats.STRING.formatValue(customer[11]));
@@ -325,13 +285,9 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         chkReceiveEmail.setSelected(((Boolean) customer[25]).booleanValue());
         chkReceivePost.setSelected(((Boolean) customer[26]).booleanValue());
         
-        m_jTaxID.setEnabled(true);
-        m_jSearchkey.setEnabled(true);
-        m_jName.setEnabled(false);
+        
         m_jNotes.setEnabled(true);
-
-        m_jVisible.setEnabled(true);
-               
+        
         txtFirstName.setEnabled(true);
         txtLastName.setEnabled(true);
         txtEmail.setEnabled(true);
@@ -361,11 +317,11 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     public Object createValue() throws BasicException {
         Object[] customer = new Object[27];
         customer[0] = m_oId == null ? UUID.randomUUID().toString() : m_oId;
-        customer[1] = m_jTaxID.getText();
-        customer[2] = m_jSearchkey.getText();
-        customer[3] = m_jName.getText();
+        customer[1] = "";
+        customer[2] = UUID.randomUUID().toString();
+        customer[3] = Formats.STRING.parseValue(txtFirstName.getText() + " " + txtLastName.getText());
         customer[4] = m_jNotes.getText();
-        customer[5] = Boolean.valueOf(m_jVisible.isSelected());
+        customer[5] = true; //default is always true
         customer[6] = ""; // Format to manage NULL values
         customer[7] = new Double(0.0);
         customer[8] = Formats.TIMESTAMP.parseValue(""); // not saved
@@ -473,14 +429,6 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel7 = new javax.swing.JLabel();
-        m_jTaxID = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        m_jSearchkey = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        m_jName = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        m_jVisible = new javax.swing.JCheckBox();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -523,36 +471,6 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jButtonSendSMS = new javax.swing.JButton();
         jButtonClearSMS = new javax.swing.JButton();
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setText(AppLocal.getIntString("label.taxid")); // NOI18N
-        jLabel7.setMaximumSize(new java.awt.Dimension(140, 25));
-        jLabel7.setMinimumSize(new java.awt.Dimension(140, 25));
-        jLabel7.setPreferredSize(new java.awt.Dimension(140, 25));
-
-        m_jTaxID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText(AppLocal.getIntString("label.custsurname")); // NOI18N
-
-        m_jSearchkey.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel3.setText(AppLocal.getIntString("label.custfullname")); // NOI18N
-        jLabel3.setMaximumSize(new java.awt.Dimension(140, 25));
-        jLabel3.setMinimumSize(new java.awt.Dimension(140, 25));
-        jLabel3.setPreferredSize(new java.awt.Dimension(140, 25));
-
-        m_jName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel4.setText(AppLocal.getIntString("label.visible")); // NOI18N
-        jLabel4.setMaximumSize(new java.awt.Dimension(140, 25));
-        jLabel4.setMinimumSize(new java.awt.Dimension(140, 25));
-        jLabel4.setPreferredSize(new java.awt.Dimension(140, 25));
-
-        m_jVisible.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        m_jVisible.setSelected(true);
-
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTabbedPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -567,21 +485,11 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jLabel19.setAlignmentX(0.5F);
 
         txtFirstName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtLastNameKeyTyped(evt);
-            }
-        });
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText(AppLocal.getIntString("label.lastname")); // NOI18N
 
         txtLastName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtLastName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtLastNameKeyTyped(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText(AppLocal.getIntString("label.email")); // NOI18N
@@ -903,52 +811,16 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(m_jVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(383, 383, 383))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(m_jTaxID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(m_jSearchkey, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(m_jName, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(m_jSearchkey, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jTaxID, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jVisible, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -982,10 +854,6 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private void jButtonClearSMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearSMSActionPerformed
         jTextSMS.setText("");
     }//GEN-LAST:event_jButtonClearSMSActionPerformed
-
-    private void txtLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLastNameKeyTyped
-        this.m_jName.setText(this.txtFirstName.getText() + " " + this.txtLastName.getText());
-    }//GEN-LAST:event_txtLastNameKeyTyped
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1005,10 +873,6 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1022,11 +886,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextSMS;
     private com.openbravo.data.gui.JImageEditor m_jImage;
-    private javax.swing.JTextField m_jName;
     private javax.swing.JTextArea m_jNotes;
-    private javax.swing.JTextField m_jSearchkey;
-    private javax.swing.JTextField m_jTaxID;
-    private javax.swing.JCheckBox m_jVisible;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtAddress2;
     private javax.swing.JTextField txtCity;
