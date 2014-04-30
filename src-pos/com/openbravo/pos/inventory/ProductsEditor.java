@@ -355,7 +355,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jName.setText(Formats.STRING.formatValue(myprod[3]));
         m_jComment.setSelected(((Boolean)myprod[4]).booleanValue());
         m_jScale.setSelected(((Boolean)myprod[5]).booleanValue());
-        m_jPriceBuy.setText(Formats.CURRENCY.formatValue(myprod[6]));
+        m_jPriceBuy.setText(Formats.INT.formatValue((double)myprod[6]/100));
         setPriceSell(myprod[7]);
         m_CategoryModel.setSelectedKey(myprod[8]);
         taxcatmodel.setSelectedKey(myprod[9]);
@@ -1020,6 +1020,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel16.setText(AppLocal.getIntString("label.prodpriceselltax")); // NOI18N
         jPanel1.add(jLabel16);
         jLabel16.setBounds(10, 160, 90, 25);
+        jLabel16.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpriceselltax")); // NOI18N
 
         m_jPriceSellTax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jPriceSellTax.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1035,6 +1036,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel3.setText(AppLocal.getIntString("label.prodpricebuy")); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 190, 80, 25);
+        jLabel3.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpricebuy")); // NOI18N
 
         m_jPriceBuy.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jPriceBuy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1059,6 +1061,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel8.setText(AppLocal.getIntString("label.prodincatalog")); // NOI18N
         jPanel1.add(jLabel8);
         jLabel8.setBounds(10, 250, 150, 25);
+        jLabel8.getAccessibleContext().setAccessibleName(bundle.getString("label.prodincatalog")); // NOI18N
 
         m_jInCatalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         m_jInCatalog.setSelected(true);
