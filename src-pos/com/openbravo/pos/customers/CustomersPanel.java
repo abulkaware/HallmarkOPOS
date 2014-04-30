@@ -76,7 +76,7 @@ public class CustomersPanel extends JPanelTable {
     
     @Override
     public ComparatorCreator getComparatorCreator() {
-        return tcustomers.getComparatorCreator(new int[] {3, 13});
+        return tcustomers.getComparatorCreator(new int[] {1, 2, 3, 4});
     }
     
     @Override

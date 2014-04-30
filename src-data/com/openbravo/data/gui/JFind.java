@@ -55,10 +55,11 @@ public class JFind extends JDialog {
         m_jWhere.setSelectedIndex(lastFindInfo.getField());
         // El Match
         m_jMatch.removeAllItems();
+        m_jMatch.addItem(LocalRes.getIntString("list.startfield"));
+        m_jMatch.addItem(LocalRes.getIntString("list.wholefield"));
         m_jMatch.addItem(LocalRes.getIntString("list.anypart"));
-        m_jMatch.setSelectedIndex(0);
-        // El case
-        m_jMatchCase.setSelected(false);
+        m_jMatch.addItem(LocalRes.getIntString("list.re"));
+        m_jMatch.setSelectedIndex(2);
         
         m_vec = lastFindInfo.getVectorer();
 
@@ -108,7 +109,6 @@ public class JFind extends JDialog {
         m_jWhere = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         m_jMatch = new javax.swing.JComboBox();
-        m_jMatchCase = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jcmdOK = new javax.swing.JButton();
         jcmdCancel = new javax.swing.JButton();
@@ -145,11 +145,6 @@ public class JFind extends JDialog {
         m_jMatch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(m_jMatch);
         m_jMatch.setBounds(110, 80, 230, 25);
-
-        m_jMatchCase.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        m_jMatchCase.setText(LocalRes.getIntString("label.casesensitive")); // NOI18N
-        jPanel1.add(m_jMatchCase);
-        m_jMatchCase.setBounds(110, 110, 230, 25);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -189,7 +184,7 @@ public class JFind extends JDialog {
 
     private void jcmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmdOKActionPerformed
         
-        m_FindInfo = new FindInfo(m_vec, m_jFind.getText(), m_jWhere.getSelectedIndex(), m_jMatchCase.isSelected(), m_jMatch.getSelectedIndex());
+        m_FindInfo = new FindInfo(m_vec, m_jFind.getText(), m_jWhere.getSelectedIndex(), false, m_jMatch.getSelectedIndex());
         
         dispose();
         
@@ -223,7 +218,6 @@ public class JFind extends JDialog {
     private javax.swing.JButton jcmdOK;
     private javax.swing.JTextField m_jFind;
     private javax.swing.JComboBox m_jMatch;
-    private javax.swing.JCheckBox m_jMatchCase;
     private javax.swing.JComboBox m_jWhere;
     // End of variables declaration//GEN-END:variables
     
