@@ -70,6 +70,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jCategory.addActionListener(dirty);
         m_jImage.addPropertyChangeListener("image", dirty);
         m_jCatNameShow.addActionListener(dirty);
+        m_jShortCode.getDocument().addDocumentListener(dirty);
         
 // Added JDL 13.04.13
        m_jTextTip.getDocument().addDocumentListener(dirty); 
@@ -111,6 +112,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jTextTip.setEnabled(false);
         m_jCatNameShow.setSelected(false);
         m_jCatNameShow.setEnabled(false);
+        m_jShortCode.setEnabled(false);
 
     }
     
@@ -129,6 +131,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jTextTip.setEnabled(true);   
         m_jCatNameShow.setSelected(true);
         m_jCatNameShow.setEnabled(true);
+        m_jShortCode.setEnabled(true);
 
     }
 
@@ -141,6 +144,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jImage.setImage((BufferedImage) cat[3]);
         m_jTextTip.setText(Formats.STRING.formatValue(cat[4]));
         m_jCatNameShow.setSelected(((Boolean)cat[5]).booleanValue());
+        m_jShortCode.setText(Formats.STRING.formatValue(cat[6]));
         m_jName.setEnabled(false);
         m_jCategory.setEnabled(false);
         m_jImage.setEnabled(false);
@@ -148,6 +152,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jCatalogAdd.setEnabled(false);
         m_jTextTip.setEnabled(false);     
         m_jCatNameShow.setEnabled(false);
+        m_jShortCode.setEnabled(false);
         
     }    
     
@@ -160,6 +165,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jImage.setImage((BufferedImage) cat[3]);
         m_jTextTip.setText(Formats.STRING.formatValue(cat[4])); 
         m_jCatNameShow.setSelected(((Boolean)cat[5]).booleanValue());
+        m_jShortCode.setText(Formats.STRING.formatValue(cat[6]));
         m_jName.setEnabled(true);
         m_jCategory.setEnabled(true);
         m_jImage.setEnabled(true);
@@ -167,13 +173,13 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         m_jCatalogAdd.setEnabled(true);
         m_jTextTip.setEnabled(true); 
         m_jCatNameShow.setEnabled(true);
-    
+        m_jShortCode.setEnabled(true);
     }
 
     @Override
     public Object createValue() throws BasicException {
         
-        Object[] cat = new Object[7];
+        Object[] cat = new Object[8];
 
         cat[0] = m_id;
         cat[1] = m_jName.getText();
@@ -181,6 +187,7 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         cat[3] = m_jImage.getImage();
         cat[4] = m_jTextTip.getText();
         cat[5] = Boolean.valueOf(m_jCatNameShow.isSelected());
+        cat[6] = m_jShortCode.getText().toUpperCase();
       
         return cat;
     }    
@@ -213,6 +220,8 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         jLabel7 = new javax.swing.JLabel();
         m_jCatNameShow = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        m_jShortCode = new javax.swing.JTextField();
 
         jInternalFrame1.setVisible(true);
 
@@ -221,16 +230,16 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText(AppLocal.getIntString("Label.Name")); // NOI18N
         add(jLabel2);
-        jLabel2.setBounds(20, 30, 80, 25);
+        jLabel2.setBounds(20, 20, 80, 25);
 
         m_jName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         add(m_jName);
-        m_jName.setBounds(200, 30, 180, 25);
+        m_jName.setBounds(200, 20, 180, 25);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText(AppLocal.getIntString("label.image")); // NOI18N
         add(jLabel3);
-        jLabel3.setBounds(20, 170, 80, 15);
+        jLabel3.setBounds(20, 170, 80, 14);
         add(m_jImage);
         m_jImage.setBounds(200, 170, 250, 190);
 
@@ -261,16 +270,16 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
             }
         });
         add(m_jCatalogDelete);
-        m_jCatalogDelete.setBounds(540, 78, 80, 33);
+        m_jCatalogDelete.setBounds(540, 78, 80, 40);
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel5.setText(AppLocal.getIntString("label.prodcategory")); // NOI18N
+        jLabel5.setText(AppLocal.getIntString("label.catname")); // NOI18N
         add(jLabel5);
-        jLabel5.setBounds(20, 60, 80, 25);
+        jLabel5.setBounds(20, 50, 80, 25);
 
         m_jCategory.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         add(m_jCategory);
-        m_jCategory.setBounds(200, 60, 180, 25);
+        m_jCategory.setBounds(200, 50, 180, 25);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 204, 204));
@@ -279,29 +288,38 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
         jLabel4.setBounds(510, 34, 30, 70);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel6.setText(bundle.getString("label.texttip")); // NOI18N
+        jLabel6.setText(bundle.getString("label.catshortcode")); // NOI18N
         add(jLabel6);
-        jLabel6.setBounds(20, 95, 100, 15);
+        jLabel6.setBounds(20, 80, 100, 14);
 
         m_jTextTip.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         add(m_jTextTip);
-        m_jTextTip.setBounds(200, 90, 180, 25);
+        m_jTextTip.setBounds(200, 110, 180, 25);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText(bundle.getString("label.subcategorytitle")); // NOI18N
         add(jLabel7);
-        jLabel7.setBounds(20, 130, 130, 15);
+        jLabel7.setBounds(20, 140, 130, 14);
 
         m_jCatNameShow.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jCatNameShow.setSelected(true);
         add(m_jCatNameShow);
-        m_jCatNameShow.setBounds(195, 130, 30, 21);
+        m_jCatNameShow.setBounds(200, 140, 30, 23);
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText(bundle.getString("label.CatalogueStatusYes")); // NOI18N
         add(jLabel8);
         jLabel8.setBounds(390, 64, 110, 20);
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel9.setText(bundle.getString("label.texttip")); // NOI18N
+        add(jLabel9);
+        jLabel9.setBounds(20, 110, 100, 14);
+
+        m_jShortCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        add(m_jShortCode);
+        m_jShortCode.setBounds(200, 80, 180, 25);
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_jCatalogDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCatalogDeleteActionPerformed
@@ -347,12 +365,14 @@ public final class CategoriesEditor extends JPanel implements EditorRecord {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JCheckBox m_jCatNameShow;
     private javax.swing.JButton m_jCatalogAdd;
     private javax.swing.JButton m_jCatalogDelete;
     private javax.swing.JComboBox m_jCategory;
     private com.openbravo.data.gui.JImageEditor m_jImage;
     private javax.swing.JTextField m_jName;
+    private javax.swing.JTextField m_jShortCode;
     private javax.swing.JTextField m_jTextTip;
     // End of variables declaration//GEN-END:variables
     

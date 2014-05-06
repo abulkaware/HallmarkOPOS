@@ -270,7 +270,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "NAME, "
                 + "IMAGE, "
                 + "TEXTTIP, "
-                + "CATSHOWNAME "
+                + "CATSHOWNAME, "
+                + "CATSHORTCODE "
                 + "FROM CATEGORIES WHERE PARENTID IS NULL ORDER BY NAME"
             , null
             , CategoryInfo.getSerializerRead()).list();
@@ -282,7 +283,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "NAME, "
                 + "IMAGE, "
                 + "TEXTTIP, "
-                + "CATSHOWNAME " 
+                + "CATSHOWNAME, "
+                + "CATSHORTCODE "
                 + "FROM CATEGORIES WHERE PARENTID = ? ORDER BY NAME"
             , SerializerWriteString.INSTANCE
             , CategoryInfo.getSerializerRead()).list(category);
@@ -424,6 +426,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 , new SerializerReadClass(PromoTypeInfo.class));
         }
         
+        
 // End of Promotion
         
   public final CategoryInfo getCategoryInfo(String id) throws BasicException {
@@ -433,7 +436,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "NAME, "
                 + "IMAGE, "
                 + "TEXTTIP, "
-                + "CATSHOWNAME "
+                + "CATSHOWNAME, "
+                + "CATSHORTCODE "
                 + "FROM CATEGORIES "
                 + "WHERE ID = ? "
                 + "ORDER BY NAME"
@@ -667,7 +671,8 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "NAME, "
                 + "IMAGE, "
                 + "TEXTTIP, "
-                + "CATSHOWNAME "
+                + "CATSHOWNAME, "
+                + "CATSHORTCODE "
                 + "FROM CATEGORIES "
                 + "ORDER BY NAME"
             , null
@@ -1339,7 +1344,6 @@ public void writeValues() throws BasicException {
         Integer next = (Integer)p.find(categoryId, categoryId);
         return next == null ? 0 : next;
         //CB: id in this case is the category id
-        
     }
 
     public final SentenceExec getCatalogCategoryAdd() {
@@ -1357,10 +1361,10 @@ public void writeValues() throws BasicException {
     public final TableDefinition getTableCategories() {
         return new TableDefinition(s,
             "CATEGORIES"
-            , new String[] {"ID", "NAME", "PARENTID", "IMAGE", "TEXTTIP", "CATSHOWNAME"}
+            , new String[] {"ID", "NAME", "PARENTID", "IMAGE", "TEXTTIP", "CATSHOWNAME", "CATSHORTCODE"}
             , new String[] {"ID", AppLocal.getIntString("Label.Name"), "", AppLocal.getIntString("label.image")}
-            , new Datas[] {Datas.STRING, Datas.STRING, Datas.STRING, Datas.IMAGE, Datas.STRING, Datas.BOOLEAN}
-            , new Formats[] {Formats.STRING, Formats.STRING, Formats.STRING, Formats.NULL, Formats.STRING, Formats.BOOLEAN}
+            , new Datas[] {Datas.STRING, Datas.STRING, Datas.STRING, Datas.IMAGE, Datas.STRING, Datas.BOOLEAN, Datas.STRING}
+            , new Formats[] {Formats.STRING, Formats.STRING, Formats.STRING, Formats.NULL, Formats.STRING, Formats.BOOLEAN, Formats.STRING}
             , new int[] {0}
         );
     }
