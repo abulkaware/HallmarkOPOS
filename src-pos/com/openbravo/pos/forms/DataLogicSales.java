@@ -1330,6 +1330,11 @@ public void writeValues() throws BasicException {
         return d == null ? 0.0 : d.doubleValue();
     }
     
+    public final void clearStockLevels() throws BasicException {
+        StaticSentence ss = new StaticSentence(s, "UPDATE PRODUCTS SET STOCKVOLUME = 0", SerializerWriteString.INSTANCE);
+        ss.exec();
+    }
+    
     public final Integer findNextProductCategorySequence(String categoryId) throws BasicException {
         
         PreparedSentence p = new PreparedSentence(s, "select sequenceid + 1"
