@@ -64,7 +64,7 @@ public class ProductFilterSales extends javax.swing.JPanel implements EditorCrea
         m_jtxtName.reset();
         m_jPriceBuy.reset();
         m_jPriceSell.reset();
-        m_jtxtName.activate();
+        m_jtxtBarCode.activate();
         
         try {
             List catlist = m_sentcat.list();

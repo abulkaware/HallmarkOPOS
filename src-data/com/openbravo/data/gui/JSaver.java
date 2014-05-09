@@ -75,9 +75,9 @@ public class JSaver extends JPanel implements StateListener {
     private void initComponents() {
 
         jbtnNew = new javax.swing.JButton();
-        jbtnDelete = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jbtnSave = new javax.swing.JButton();
+        jbtnDelete = new javax.swing.JButton();
 
         setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -93,19 +93,6 @@ public class JSaver extends JPanel implements StateListener {
             }
         });
         add(jbtnNew);
-
-        jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/sale_delete.png"))); // NOI18N
-        jbtnDelete.setToolTipText("Delete");
-        jbtnDelete.setFocusPainted(false);
-        jbtnDelete.setFocusable(false);
-        jbtnDelete.setMargin(new java.awt.Insets(2, 8, 2, 8));
-        jbtnDelete.setRequestFocusEnabled(false);
-        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnDeleteActionPerformed(evt);
-            }
-        });
-        add(jbtnDelete);
         add(jSeparator1);
 
         jbtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/filesave.png"))); // NOI18N
@@ -120,6 +107,19 @@ public class JSaver extends JPanel implements StateListener {
             }
         });
         add(jbtnSave);
+
+        jbtnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/sale_delete.png"))); // NOI18N
+        jbtnDelete.setToolTipText("Delete");
+        jbtnDelete.setFocusPainted(false);
+        jbtnDelete.setFocusable(false);
+        jbtnDelete.setMargin(new java.awt.Insets(2, 8, 2, 8));
+        jbtnDelete.setRequestFocusEnabled(false);
+        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDeleteActionPerformed(evt);
+            }
+        });
+        add(jbtnDelete);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
@@ -134,12 +134,15 @@ public class JSaver extends JPanel implements StateListener {
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
         // Add your handling code here:
-        try {
-            m_bd.actionDelete();
-        } catch (BasicException eD) {
-            MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nodelete"), eD);
-            msg.show(this);
-        }        
+        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this item?"))
+        {
+            try {
+                m_bd.actionDelete();
+            } catch (BasicException eD) {
+                MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nodelete"), eD);
+                msg.show(this);
+            }   
+        }
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jbtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNewActionPerformed

@@ -541,7 +541,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         myprod[6] = getCostPrice(); //Formats.CURRENCY.parseValue(m_jPriceBuy.getText());
         myprod[7] = pricesell;
         myprod[8] = m_CategoryModel.getSelectedKey();
-        myprod[9] = taxcatmodel.getSelectedKey();
+        myprod[9] = "001"; //tax cat is always standard tax
         myprod[10] = suppliermodel.getSelectedKey();
         myprod[11] = m_jImage.getImage();
         myprod[12] = Formats.CURRENCY.parseValue(m_jstockcost.getText());
