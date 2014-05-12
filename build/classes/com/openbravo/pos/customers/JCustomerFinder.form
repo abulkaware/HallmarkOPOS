@@ -95,7 +95,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="m_jtxtName" min="-2" pref="220" max="-2" attributes="0"/>
                               <Component id="m_jtxtPhone" min="-2" pref="220" max="-2" attributes="0"/>
-                              <Component id="m_jtxtName2" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
+                              <Component id="m_jtxtEmail" alignment="1" min="-2" pref="220" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="27" max="32767" attributes="0"/>
                       </Group>
@@ -129,10 +129,11 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLblEmail" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="m_jtxtName2" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="m_jtxtEmail" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="171" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -148,7 +149,7 @@
                       <Font name="Arial" size="12" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="pos_messages.properties" key="label.prodname" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
+                      <ResourceString bundle="pos_messages.properties" key="label.name" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
                     </Property>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[60, 15]"/>
@@ -198,7 +199,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="com.openbravo.editor.JEditorString" name="m_jtxtName2">
+                <Component class="com.openbravo.editor.JEditorString" name="m_jtxtEmail">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Arial" size="12" style="0"/>

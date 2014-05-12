@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ClearStockEditor.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ProductsPanel.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/JCustomerFinder.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/forms/DataLogicSales.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/locales/pos_messages.properties</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ClearStockPanel.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/StockDiaryPanel.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ProductsWarehousePanel.java</file>
-            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/CategoriesEditor.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomersPanel.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomerRenderer.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JPanelTicket.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomersView.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentMagcard.java</file>
         </group>
     </open-files>
 </project-private>

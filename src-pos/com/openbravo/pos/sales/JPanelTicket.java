@@ -333,9 +333,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             m_jaddtax.setVisible(false);
 //        }
 
-        // Authorization for buttons
-        btnSplit.setVisible(false);
-        btnSplit.setEnabled(m_App.getAppUserView().getUser().hasPermission("sales.Total"));
         m_jDelete.setEnabled(m_App.getAppUserView().getUser().hasPermission("sales.EditLines"));
         m_jNumberKeys.setMinusEnabled(m_App.getAppUserView().getUser().hasPermission("sales.EditLines"));
         m_jNumberKeys.setEqualsEnabled(m_App.getAppUserView().getUser().hasPermission("sales.Total"));
@@ -412,11 +409,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         executeEvent(m_oTicket, m_oTicketExt, "ticket.show");
     
-        if ("restaurant".equals(m_App.getProperties().getProperty("machine.ticketsbag"))){
-      //      j_btnKitchenPrt.setVisible(false); 
-        }else{
-            j_btnKitchenPrt.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.PrintKitchen")); 
-         }
+        
         refreshTicket();               
     }
     
@@ -1543,13 +1536,11 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
         m_jTicketId = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnCustomer = new javax.swing.JButton();
-        btnSplit = new javax.swing.JButton();
         m_jPanelScripts = new javax.swing.JPanel();
         m_jButtonsExt = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         m_jbtnScale = new javax.swing.JButton();
         jbtnMooring = new javax.swing.JButton();
-        j_btnKitchenPrt = new javax.swing.JButton();
         m_jPanelBag = new javax.swing.JPanel();
         m_jPanTicket = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -1559,7 +1550,6 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
         m_jDelete = new javax.swing.JButton();
         m_jList = new javax.swing.JButton();
         m_jEditLine = new javax.swing.JButton();
-        jEditAttributes = new javax.swing.JButton();
         m_jPanelCentral = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         m_jPanTotals = new javax.swing.JPanel();
@@ -1625,21 +1615,6 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
             }
         });
 
-        btnSplit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/sale_split_sml.png"))); // NOI18N
-        btnSplit.setToolTipText("Split Sale");
-        btnSplit.setFocusPainted(false);
-        btnSplit.setFocusable(false);
-        btnSplit.setMargin(new java.awt.Insets(0, 4, 0, 4));
-        btnSplit.setMaximumSize(new java.awt.Dimension(50, 40));
-        btnSplit.setMinimumSize(new java.awt.Dimension(50, 40));
-        btnSplit.setPreferredSize(new java.awt.Dimension(50, 40));
-        btnSplit.setRequestFocusEnabled(false);
-        btnSplit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSplitActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout m_jButtonsLayout = new javax.swing.GroupLayout(m_jButtons);
         m_jButtons.setLayout(m_jButtonsLayout);
         m_jButtonsLayout.setHorizontalGroup(
@@ -1651,24 +1626,22 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSplit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         m_jButtonsLayout.setVerticalGroup(
             m_jButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(m_jButtonsLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(m_jTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(m_jButtonsLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(m_jButtonsLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(m_jButtonsLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(btnSplit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(m_jButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(m_jButtonsLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(m_jTicketId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(m_jButtonsLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(m_jButtonsLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5))
         );
 
         m_jOptions.add(m_jButtons, java.awt.BorderLayout.LINE_START);
@@ -1709,21 +1682,6 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
             }
         });
         jPanel1.add(jbtnMooring);
-
-        j_btnKitchenPrt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/printer24.png"))); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
-        j_btnKitchenPrt.setText(bundle.getString("button.sendorder")); // NOI18N
-        j_btnKitchenPrt.setToolTipText("Send to Kichen Printer");
-        j_btnKitchenPrt.setMargin(new java.awt.Insets(0, 4, 0, 4));
-        j_btnKitchenPrt.setMaximumSize(new java.awt.Dimension(50, 40));
-        j_btnKitchenPrt.setMinimumSize(new java.awt.Dimension(50, 40));
-        j_btnKitchenPrt.setPreferredSize(new java.awt.Dimension(50, 40));
-        j_btnKitchenPrt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                j_btnKitchenPrtActionPerformed(evt);
-            }
-        });
-        jPanel1.add(j_btnKitchenPrt);
 
         m_jButtonsExt.add(jPanel1);
 
@@ -1826,22 +1784,6 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
             }
         });
         jPanel2.add(m_jEditLine);
-
-        jEditAttributes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/attributes.png"))); // NOI18N
-        jEditAttributes.setToolTipText("Choose Attributes");
-        jEditAttributes.setFocusPainted(false);
-        jEditAttributes.setFocusable(false);
-        jEditAttributes.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        jEditAttributes.setMaximumSize(new java.awt.Dimension(42, 36));
-        jEditAttributes.setMinimumSize(new java.awt.Dimension(42, 36));
-        jEditAttributes.setPreferredSize(new java.awt.Dimension(50, 36));
-        jEditAttributes.setRequestFocusEnabled(false);
-        jEditAttributes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEditAttributesActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jEditAttributes);
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.NORTH);
 
@@ -2147,56 +2089,6 @@ if (pickupSize!=null && (Integer.parseInt(pickupSize) >= tmpPickupId.length())){
         refreshTicket();     
 }//GEN-LAST:event_btnCustomerActionPerformed
 
-    private void btnSplitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSplitActionPerformed
-
-        if (m_oTicket.getLinesCount() > 0) {
-            ReceiptSplit splitdialog = ReceiptSplit.getDialog(this, dlSystem.getResourceAsXML("Ticket.Line"), dlSales, dlCustomers, taxeslogic);
-            
-            TicketInfo ticket1 = m_oTicket.copyTicket();
-            TicketInfo ticket2 = new TicketInfo();
-            ticket2.setCustomer(m_oTicket.getCustomer());
-            
-            if (splitdialog.showDialog(ticket1, ticket2, m_oTicketExt)) {
-                if (closeTicket(ticket2, m_oTicketExt)) { // already checked  that number of lines > 0                            
-                    setActiveTicket(ticket1, m_oTicketExt);// set result ticket
-// maybe look at returning to table set up after splitting the bill
-
-                    
-                }
-            }
-        }
-        
-}//GEN-LAST:event_btnSplitActionPerformed
-
-    private void jEditAttributesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditAttributesActionPerformed
-       if (listener  != null) {
-            listener.stop();
-        } 
-        int i = m_ticketlines.getSelectedIndex();
-        if (i < 0) {
-            Toolkit.getDefaultToolkit().beep(); // no line selected
-        } else {
-            try {
-                TicketLineInfo line = m_oTicket.getLine(i);
-                JProductAttEdit attedit = JProductAttEdit.getAttributesEditor(this, m_App.getSession());
-                attedit.editAttributes(line.getProductAttSetId(), line.getProductAttSetInstId());
-                attedit.setVisible(true);
-                if (attedit.isOK()) {
-                    // The user pressed OK
-                    line.setProductAttSetInstId(attedit.getAttributeSetInst());
-                    line.setProductAttSetInstDesc(attedit.getAttributeSetInstDescription());
-                    paintTicketLine(i, line);
-                }
-            } catch (BasicException ex) {
-                MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindattributes"), ex);
-                msg.show(this);
-            }
-        }
-       if (listener  != null){           
-       listener.restart(); 
-       }
-}//GEN-LAST:event_jEditAttributesActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
 // Show the custmer panel - this does deactivate
@@ -2236,35 +2128,6 @@ m_App.getAppUserView().showTask("com.openbravo.pos.customers.CustomersPanel");
                refreshTicket(); 
     }//GEN-LAST:event_jbtnMooringActionPerformed
 
-    private void j_btnKitchenPrtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j_btnKitchenPrtActionPerformed
-// John L - replace older SendOrder script
-        
-        String rScript = (dlSystem.getResourceAsText("script.SendOrder"));
-
-            Interpreter i = new Interpreter(); 
-        try {                       
-            i.set("ticket", m_oTicket);  
-            i.set("place",  m_oTicketExt);             
-            i.set("user", m_App.getAppUserView().getUser());
-            i.set("sales", this);
-            i.set("pickupid", m_oTicket.getPickupId());
-            Object result;
-            result = i.eval(rScript);
-        } catch (EvalError ex) {
-            Logger.getLogger(JPanelTicket.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-// Autologoff after sending to kitchen   
-       
-            String autoLogoff = (m_App.getProperties().getProperty("till.autoLogoff"));
-            if (autoLogoff != null){
-                if (autoLogoff.equals("true")){  
-                    ((JRootApp)m_App).closeAppView();    
-                      }
-                }    
-
-    }//GEN-LAST:event_j_btnKitchenPrtActionPerformed
-
     private void m_jTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jTaxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_m_jTaxActionPerformed
@@ -2272,16 +2135,13 @@ m_App.getAppUserView().showTask("com.openbravo.pos.customers.CustomersPanel");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
-    private javax.swing.JButton btnSplit;
     private javax.swing.JPanel catcontainer;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JButton j_btnKitchenPrt;
     private javax.swing.JButton jbtnMooring;
     private javax.swing.JPanel m_jButtons;
     private javax.swing.JPanel m_jButtonsExt;

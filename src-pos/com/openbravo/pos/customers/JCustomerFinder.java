@@ -76,11 +76,12 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
 
         m_jtxtName.addEditorKeys(m_jKeys);
         m_jtxtPhone.addEditorKeys(m_jKeys);
-        m_jtxtName2.addEditorKeys(m_jKeys);
+        m_jtxtEmail.addEditorKeys(m_jKeys);
         
         m_jtxtName.reset();
         m_jtxtPhone.reset();
-        m_jtxtName2.reset();
+        m_jtxtEmail.reset();
+        m_jtxtName.activate();
 
         lpr = new ListProviderCreator(dlCustomers.getCustomerList(), this);
 
@@ -97,17 +98,20 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             
             m_jtxtName.reset();
             m_jtxtPhone.reset();
-            m_jtxtName2.reset();            
+            m_jtxtEmail.reset();
+            
             
             cleanSearch();
         } else {
 
             m_jtxtName.setText(customer.getName());
             m_jtxtPhone.setText(customer.getPhone());
-            m_jtxtName2.setText(customer.getEmail());
+            m_jtxtEmail.setText(customer.getEmail());
             
             executeSearch();
         }
+        
+        m_jtxtName.activate();
     }
     
     private void cleanSearch() {
@@ -128,6 +132,15 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
     public Object createValue() throws BasicException {
         
         Object[] afilter = new Object[12]; 
+        
+        // CB: Old tax id = set to null;
+        afilter[0] = QBFCompareEnum.COMP_NONE;
+        afilter[1] = null;
+        
+        // CB: Old search key = set to null;
+        afilter[2] = QBFCompareEnum.COMP_NONE;
+        afilter[3] = null;
+        
         // Name
         if (m_jtxtName.getText() == null || m_jtxtName.getText().equals("")) {
             afilter[4] = QBFCompareEnum.COMP_NONE;
@@ -136,6 +149,10 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             afilter[4] = QBFCompareEnum.COMP_RE;
             afilter[5] = "%" + m_jtxtName.getText() + "%";
         }
+        
+        // CB: Old postal = set to null;
+        afilter[6] = QBFCompareEnum.COMP_NONE;
+        afilter[7] = null;
          
 // Added JG 20 Sept 12
         // Phone
@@ -149,12 +166,12 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         
 // Added JG 20 Sept 12
         // Email
-        if (m_jtxtName2.getText() == null || m_jtxtName2.getText().equals("")) {
+        if (m_jtxtEmail.getText() == null || m_jtxtEmail.getText().equals("")) {
             afilter[10] = QBFCompareEnum.COMP_NONE;
             afilter[11] = null;
         } else {
             afilter[10] = QBFCompareEnum.COMP_RE;
-            afilter[11] = "%" + m_jtxtName2.getText() + "%";    
+            afilter[11] = "%" + m_jtxtEmail.getText() + "%";    
         }        
             
         return afilter;
@@ -207,7 +224,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         jLblPhone = new javax.swing.JLabel();
         jLblEmail = new javax.swing.JLabel();
         m_jtxtPhone = new com.openbravo.editor.JEditorString();
-        m_jtxtName2 = new com.openbravo.editor.JEditorString();
+        m_jtxtEmail = new com.openbravo.editor.JEditorString();
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -240,7 +257,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         jLblName.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLblName.setText(AppLocal.getIntString("label.prodname")); // NOI18N
+        jLblName.setText(AppLocal.getIntString("label.name")); // NOI18N
         jLblName.setMaximumSize(new java.awt.Dimension(60, 15));
         jLblName.setMinimumSize(new java.awt.Dimension(60, 15));
         jLblName.setPreferredSize(new java.awt.Dimension(60, 15));
@@ -256,7 +273,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
 
         m_jtxtPhone.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        m_jtxtName2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        m_jtxtEmail.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/reload.png"))); // NOI18N
@@ -343,7 +360,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(m_jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(m_jtxtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jtxtName2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(m_jtxtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -368,9 +385,10 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLblEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m_jtxtName2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(m_jtxtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,7 +451,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
  
         m_jtxtName.reset();
         m_jtxtPhone.reset();
-        m_jtxtName2.reset(); 
+        m_jtxtEmail.reset(); 
+        m_jtxtName.activate();
 
         cleanSearch();           
 }//GEN-LAST:event_jButton1ActionPerformed
@@ -461,8 +480,8 @@ private void m_jKeysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JButton jcmdCancel;
     private javax.swing.JButton jcmdOK;
     private com.openbravo.editor.JEditorKeys m_jKeys;
+    private com.openbravo.editor.JEditorString m_jtxtEmail;
     private com.openbravo.editor.JEditorString m_jtxtName;
-    private com.openbravo.editor.JEditorString m_jtxtName2;
     private com.openbravo.editor.JEditorString m_jtxtPhone;
     // End of variables declaration//GEN-END:variables
 }

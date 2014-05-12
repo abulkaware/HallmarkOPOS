@@ -555,7 +555,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 // Added JG 25.06.11 - Is Service
 	myprod[18] = Boolean.valueOf(m_jService.isSelected());
 // **
-        myprod[19] = m_jDisplay.getText();        
+        myprod[19] = "<html>" + m_jRef.getText() + ": " + m_jName.getText();
 
 // Added JDL 19.12.12 - Var Price
 	myprod[20] = Boolean.valueOf(m_jVprice.isSelected());  
