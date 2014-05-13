@@ -216,7 +216,12 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         
         // inicializamos
         m_oTicket = null;
-        m_oTicketExt = null;      
+        m_oTicketExt = null;
+        
+        m_jLblTotalEuros3.setVisible(false);
+        m_jSubtotalEuros.setVisible(false);
+        m_jLblTotalEuros2.setVisible(false);
+        m_jTaxesEuros.setVisible(false);
         
     }
     
