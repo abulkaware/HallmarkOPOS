@@ -60,6 +60,7 @@ public String getFirstElement(){
     return(rtnKey);
 }
 
+
 public void removeFirst (String pName){
    paymentPaid.remove(pName);
    paymentTendered.remove(pName);

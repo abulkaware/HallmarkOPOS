@@ -32,6 +32,9 @@ import com.openbravo.pos.forms.BeanFactoryDataSingle;
 public class DataLogicCustomers extends BeanFactoryDataSingle {
     
     protected Session s;
+    
+    private TableDefinition tsuppliers;
+    
     private TableDefinition tcustomers;
     private static Datas[] customerdatas = new Datas[] {
         Datas.STRING, 
@@ -49,6 +52,83 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
     public void init(Session s){
 // JG 03 Oct - Added Customer Image        
         this.s = s;
+        
+        tsuppliers = new TableDefinition(s
+            , "SUPPLIERS"
+            , new String[] {
+                "ID",
+                "SEARCHKEY",
+                "CODE",
+                "OURREF",
+                "NAME",
+                "ADDRESS",
+                "ADDRESS2",
+                "POSTAL",
+                "CITY",
+                "REGION",
+                "COUNTRY",
+                "CONTACTNAME",
+                "EMAIL",
+                "PHONE",
+                "PHONE2",
+                "FAX",
+                "NOTES"
+            }, new String[] {
+                "ID",
+                AppLocal.getIntString("label.searchkey"),
+                "CODE",
+                "OURREF",
+                "NAME",
+                AppLocal.getIntString("label.address"),
+                AppLocal.getIntString("label.address2"),
+                AppLocal.getIntString("label.postal"),
+                AppLocal.getIntString("label.city"),
+                AppLocal.getIntString("label.region"),
+                AppLocal.getIntString("label.country"),
+                "CONTACTNAME",
+                AppLocal.getIntString("label.email"),
+                AppLocal.getIntString("label.phone"),
+                AppLocal.getIntString("label.phone2"),
+                AppLocal.getIntString("label.fax"),
+                "NOTES"
+            }, new Datas[] {
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING,
+                Datas.STRING
+            }, new Formats[] {
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING,
+                Formats.STRING
+            }, new int[] {0});
+        
         tcustomers = new TableDefinition(s
             , "CUSTOMERS"
             , new String[] { 
@@ -272,5 +352,9 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
     
     public final TableDefinition getTableCustomers() {
         return tcustomers;
-    }  
+    }
+    
+    public final TableDefinition getTableSuppliers() {
+        return tsuppliers;
+    }
 }
