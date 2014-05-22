@@ -482,11 +482,12 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "FROM PRODUCTS "
                 + "WHERE ?(QBF_FILTER) "
                 + "ORDER BY REFERENCE", 
-                new String[] {"NAME", "PRICEBUY", "PRICESELL", "CATEGORY", "CODE"})
+                new String[] {"NAME", "PRICEBUY", "PRICESELL", "CATEGORY", "REFERENCE", "CODE"})
 		, new SerializerWriteBasic(new Datas[] {
                     Datas.OBJECT, Datas.STRING, 
                     Datas.OBJECT, Datas.DOUBLE, 
                     Datas.OBJECT, Datas.DOUBLE, 
+                    Datas.OBJECT, Datas.STRING, 
                     Datas.OBJECT, Datas.STRING, 
                     Datas.OBJECT, Datas.STRING})
 		, ProductInfoExt.getSerializerRead());
