@@ -52,7 +52,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
     private Object m_oId;
     
     private List<SupplierStockItem> supplierItemList;
-    private TransactionTableModel transactionModel;
+    private StockTableModel stockModel;
     
     private DirtyManager m_Dirty;
     private DataLogicSales dlSales;
@@ -97,7 +97,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
     
     @SuppressWarnings("unchecked")
     public void activate() throws BasicException {
-        supplierItemList = dlSales.getCustomersTransactionList();
+        supplierItemList = dlSales.getSupplierStockItems();
     }
     
     @Override
@@ -132,6 +132,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         txtEmail.setEnabled(false);
         txtPhone.setEnabled(false);
         txtPhone2.setEnabled(false);
+        txtFax.setEnabled(false);
          
         txtAddress.setEnabled(false);
         txtAddress2.setEnabled(false);
@@ -155,6 +156,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         txtEmail.setText(null);
         txtPhone.setText(null);
         txtPhone2.setText(null);
+        txtFax.setText(null);
         
         txtAddress.setText(null);
         txtAddress2.setText(null);
@@ -170,6 +172,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         txtEmail.setEnabled(true);
         txtPhone.setEnabled(true);
         txtPhone2.setEnabled(true);
+        txtFax.setEnabled(true);
         
         txtAddress.setEnabled(true);
         txtAddress2.setEnabled(true);
@@ -226,14 +229,15 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         
 
 // JG 3 Oct 2013 - for Transaction List table
-        transactionModel = new TransactionTableModel(getProductsOfSupplier((String)supplier[0]));
-        jTable1.setModel(transactionModel);
+        stockModel = new StockTableModel(getProductsOfSupplier((String)supplier[0]));
+        jTable1.setModel(stockModel);
         jTable1.setEnabled(false);
     }
 
     @Override
     public void writeValueEdit(Object value) {
         Object[] supplier = (Object[]) value;
+        m_oId = supplier[0];
         txtSupplierCode.setText(Formats.STRING.formatValue(supplier[2]));
         txtOurReference.setText(Formats.STRING.formatValue(supplier[3]));
         txtCompanyName.setText(Formats.STRING.formatValue(supplier[4]));
@@ -273,14 +277,14 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         txtCountry.setEnabled(true);
         
   
-        transactionModel = new TransactionTableModel(getProductsOfSupplier((String) supplier[0]));
-        jTable1.setModel(transactionModel);
+        stockModel = new StockTableModel(getProductsOfSupplier((String) supplier[0]));
+        jTable1.setModel(stockModel);
         jTable1.setEnabled(true);
     }
     
     @Override
     public Object createValue() throws BasicException {
-        Object[] supplier = new Object[27];
+        Object[] supplier = new Object[17];
         supplier[0] = m_oId == null ? UUID.randomUUID().toString() : m_oId;
         supplier[1] = Formats.STRING.parseValue(txtSupplierCode.getText() + " " + txtCompanyName.getText());
         supplier[2] = Formats.STRING.parseValue(txtSupplierCode.getText());
@@ -316,7 +320,7 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
 
         List<SupplierStockItem> itemList = new ArrayList<>();
 
-        for (SupplierStockItem stockItem : itemList) {
+        for (SupplierStockItem stockItem : supplierItemList) {
             String supplierId = stockItem.getSupplierId();
             if (supplierId.equals(id)) {
                 itemList.add(stockItem);
@@ -325,18 +329,18 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         return itemList;
     }
 
-    class TransactionTableModel extends AbstractTableModel {
+    class StockTableModel extends AbstractTableModel {
 
-        List<CustomerTransaction> transactionList;
-        String[] columnNames = {"Stock ID", "Supp. Code", "Description"};
+        List<SupplierStockItem> transactionList;
+        String[] columnNames = {"Stock Code", "Supp. Code", "Curr. Stock", "Description"};
 
-        public TransactionTableModel(List<CustomerTransaction> list) {
+        public StockTableModel(List<SupplierStockItem> list) {
             transactionList = list;
         }
 
         @Override
         public int getColumnCount() {
-            return 5;
+            return 4;
         }
 
         @Override
@@ -347,25 +351,17 @@ public class SuppliersView extends javax.swing.JPanel implements EditorRecord {
         // this method is called to set the value of each cell
         @Override
         public Object getValueAt(int row, int column) {
-            CustomerTransaction customerTransaction = transactionList.get(row);
+            SupplierStockItem supplierStockItem = transactionList.get(row);
             switch (column) {
 
                 case 0:
-                    return customerTransaction.getTicketId();                    
+                    return supplierStockItem.getProductCode();                    
                 case 1:
-                    Date transactionDate = customerTransaction.getTransactionDate();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String formattedDate = sdf.format(transactionDate);
-                    return formattedDate;
+                    return supplierStockItem.getSupplierCode();
                 case 2:
-                    return customerTransaction.getProductName();
+                    return supplierStockItem.getStockLevel();
                 case 3:
-                    return customerTransaction.getUnit();
-                case 4:
-                    Double amount = customerTransaction.getTotal();
-                    DecimalFormat df = new DecimalFormat("#.##");                    
-                    String formattedAmount = df.format(amount);
-                    return formattedAmount;
+                    return supplierStockItem.getDescription();
                 default:
                     return "";
             }

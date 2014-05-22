@@ -248,6 +248,8 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
         
     }
     
+    
+    
     // JG 20 Sept 12 extended for Postal - CustomerList list
     // JG 2 Sept 13 extended for Phone + Email - CustomerList list    
     public SentenceList getCustomerList() {

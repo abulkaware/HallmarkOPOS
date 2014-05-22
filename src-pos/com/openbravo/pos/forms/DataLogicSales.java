@@ -26,6 +26,7 @@ import com.openbravo.data.model.Row;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.customers.CustomerTransaction;
+import com.openbravo.pos.customers.SupplierStockItem;
 import com.openbravo.pos.inventory.*;
 import com.openbravo.pos.mant.FloorsInfo;
 import com.openbravo.pos.payment.PaymentInfo;
@@ -710,6 +711,14 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ORDER BY RECEIPTS.DATENEW DESC, PRODUCTS.NAME",
                 null,
                 CustomerTransaction.getSerializerRead()).list();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public final List<SupplierStockItem> getSupplierStockItems() throws BasicException {
+        return new PreparedSentence(s,               
+                "SELECT SUPPLIERID, REFERENCE, CODE,  NAME, STOCKVOLUME FROM PRODUCTS WHERE SUPPLIERID IS NOT NULL ORDER BY REFERENCE",
+                null,
+                SupplierStockItem.getSerializerRead()).list();
     }
     
     public final SentenceList getTaxCategoriesList() {

@@ -29,86 +29,63 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Jack Gerrard 1 Nov 12
- * for later release
- * Customer Tranx tab
- */
 public class SupplierStockItem {
 
-    String ticketId;
-    String productName;
-    String unit;
+    String supplierId;
+    String productCode;
+    String supplierCode;
     String description;
+    int stockLevel;
 
     public SupplierStockItem() {
     }
 
-    public SupplierStockItem(String ticketId, String productName, String unit, Double amount, Double total, Date transactionDate, String name) {
-        this.ticketId = ticketId;
-        this.productName = productName;
-        this.unit = unit;
-        this.amount = amount;
-        this.total = total;
-        this.transactionDate = transactionDate;
-        this.customerName = name;
+    public SupplierStockItem(String siId, String productCode, String supplierCode, String desc, int stockLevel) {
+        this.supplierId = siId;
+        this.productCode = productCode;
+        this.description = desc;
+        this.stockLevel = stockLevel;
+        this.supplierCode = supplierCode;
     }
 
-    public String getTicketId() {
-        return ticketId;
+    public String getSupplierId() {
+        return supplierId;
     }
 
-    public void setTicketId(String ticketId) {
-        this.ticketId = ticketId;
+    public void setSupplierId(String siId) {
+        this.supplierId = siId;
     }
 
-    public Double getAmount() {
-        return amount;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+    
+    public String getSupplierCode() {
+        return supplierCode;
     }
 
-    public void setTotal(Double  total) {
-        this.total = total;
+    public void setSupplierCode(String supplierCode) {
+        this.supplierCode = supplierCode;
     }
 
-    public Double getTotal() {
-        return total;
+    public String getDescription() {
+        return description;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public int getStockLevel() {
+        return stockLevel;
     }
 
-    public Date getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setStockLevel(int level) {
+        this.stockLevel = level;
     }
 
     public static SerializerRead getSerializerRead() {
@@ -117,23 +94,13 @@ public class SupplierStockItem {
             @Override
             public Object readValues(DataRead dr) throws BasicException {
 
-                String ticketId = dr.getString(1);
-                String productName = dr.getString(2);
-                String unit = dr.getString(3);
-                Double amount = dr.getDouble(4);
-                Double total = dr.getDouble(5);
-                String dateValue = dr.getString(6);
-                String customerName = dr.getString(7);
+                String supplierId = dr.getString(1);
+                String productCode = dr.getString(2);
+                String supplierCode = dr.getString(3);
+                String description = dr.getString(4);
+                int stockLevel = dr.getInt(5);
 
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Date date = null;
-                try {
-                    date = formatter.parse(dateValue);
-                } catch (ParseException ex) {
-                    Logger.getLogger(DataLogicSales.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return new SupplierStockItem(ticketId, productName, unit, amount, total, date, customerName);
+                return new SupplierStockItem(supplierId, productCode, supplierCode, description, stockLevel);
             }
         };
     }

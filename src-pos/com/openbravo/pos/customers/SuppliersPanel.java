@@ -67,17 +67,17 @@ public class SuppliersPanel extends JPanelTable {
     
     @Override
     public Vectorer getVectorer() {
-        return tsuppliers.getVectorerBasic(new int[]{3, 13});
+        return tsuppliers.getVectorerBasic(new int[]{4});
     }
     
     @Override
     public ComparatorCreator getComparatorCreator() {
-        return tsuppliers.getComparatorCreator(new int[] {1, 2, 3, 4});
+        return tsuppliers.getComparatorCreator(new int[] {4});
     }
     
     @Override
     public ListCellRenderer getListCellRenderer() {
-        return new ListCellRendererBasic(tsuppliers.getRenderStringBasic(new int[]{3,12}));
+        return new ListCellRendererBasic(tsuppliers.getRenderStringBasic(new int[]{4}));
     }
     
     @Override
