@@ -91,8 +91,12 @@ public class JClockPanel extends javax.swing.JPanel {
         double dsecond = 0.0;
             
         // Calculo los atributos de la hora que voy a pintar
-        if (m_date != null) {            
+        if (m_date != null) {
+            
             m_calendar.setTime(m_date);
+//            m_calendar.set(Calendar.HOUR_OF_DAY, 23);
+//            m_calendar.set(Calendar.MINUTE, 59);
+//            m_calendar.set(Calendar.SECOND, 59);
             dhour = (double) m_calendar.get(Calendar.HOUR_OF_DAY);
             dminute = (double) m_calendar.get(Calendar.MINUTE);
             dsecond = (double) m_calendar.get(Calendar.SECOND);
