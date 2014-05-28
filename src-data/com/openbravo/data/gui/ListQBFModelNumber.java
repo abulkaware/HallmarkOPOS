@@ -59,12 +59,12 @@ private Object m_sel;
     public static ListQBFModelNumber getMandatoryNumber() {
         return new ListQBFModelNumber(
             QBFCompareEnum.COMP_NONE,
-            QBFCompareEnum.COMP_EQUALS,
-            QBFCompareEnum.COMP_DISTINCT,
+            //QBFCompareEnum.COMP_EQUALS,
+            //QBFCompareEnum.COMP_DISTINCT,
             QBFCompareEnum.COMP_GREATER,
-            QBFCompareEnum.COMP_LESS,
-            QBFCompareEnum.COMP_GREATEROREQUALS,
-            QBFCompareEnum.COMP_LESSOREQUALS
+            QBFCompareEnum.COMP_LESS
+            //QBFCompareEnum.COMP_GREATEROREQUALS,
+            //QBFCompareEnum.COMP_LESSOREQUALS
         );
     }
 

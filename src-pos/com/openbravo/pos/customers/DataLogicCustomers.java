@@ -129,6 +129,7 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
                 Formats.STRING
             }, new int[] {0});
         
+        
         tcustomers = new TableDefinition(s
             , "CUSTOMERS"
             , new String[] { 

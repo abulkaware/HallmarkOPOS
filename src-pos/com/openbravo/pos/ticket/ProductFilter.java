@@ -58,6 +58,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
 //        m_jCboPriceBuy.setModel(new ListQBFModelNumber());
 //        m_jCboPriceSell.setModel(new ListQBFModelNumber());
         m_jCboName.setModel(ListQBFModelNumber.getMandatoryString());
+        
         m_jCboPriceBuy.setModel(ListQBFModelNumber.getMandatoryNumber());
         m_jCboPriceSell.setModel(ListQBFModelNumber.getMandatoryNumber());
     }
