@@ -1161,6 +1161,17 @@ public void writeValues() throws BasicException {
 // ADDED JDL 10.04.2013 TEXTTIP text 
 // ADDED JDL 25.05.13 Warranty flag   
     
+    public final SentenceList getProductCatQBFHallmark()
+    {
+        return new StaticSentence(s
+		, new QBFBuilder(
+			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.SUPPLIERID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY, P.SEQUENCEID " +
+			"FROM PRODUCTS P LEFT OUTER JOIN PRODUCTS_CAT C ON P.ID = C.PRODUCT " +
+			"WHERE ?(QBF_FILTER) " +
+			"ORDER BY P.REFERENCE", new String[] {"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
+		, new SerializerWriteBasic(new Datas[] {Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING})
+		, productsRow.getSerializerRead());
+    }
 
     public final SentenceList getProductCatQBF() {
  	return new StaticSentence(s
