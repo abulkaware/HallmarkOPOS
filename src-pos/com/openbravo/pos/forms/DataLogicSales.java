@@ -110,7 +110,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 
         productsRow = new Row(
                 new Field("ID", Datas.STRING, Formats.STRING),
-                new Field(AppLocal.getIntString("label.prodref"), Datas.STRING, Formats.STRING, true, true, true),
+                new Field(AppLocal.getIntString("label.prodref"), Datas.STRING, Formats.STRING, false, true, true),
                 new Field(AppLocal.getIntString("label.prodbarcode"), Datas.STRING, Formats.STRING, false, true, true),
                 new Field(AppLocal.getIntString("label.prodname"), Datas.STRING, Formats.STRING, true, true, true),
                 new Field("ISCOM", Datas.BOOLEAN, Formats.BOOLEAN),
@@ -478,7 +478,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "ISVERPATRIB, "
                 + "TEXTTIP, "
                 + "WARRANTY, "
-                + "SEQUENCEID " 
+                + "SEQUENCEID "
                 + "FROM PRODUCTS "
                 + "WHERE ?(QBF_FILTER) "
                 + "ORDER BY REFERENCE", 
@@ -1168,7 +1168,7 @@ public void writeValues() throws BasicException {
 			"SELECT P.ID, P.REFERENCE, P.CODE, P.NAME, P.ISCOM, P.ISSCALE, P.PRICEBUY, P.PRICESELL, P.CATEGORY, P.TAXCAT, P.SUPPLIERID, P.IMAGE, P.STOCKCOST, P.STOCKVOLUME, CASE WHEN C.PRODUCT IS NULL THEN " + s.DB.FALSE() + " ELSE " + s.DB.TRUE() + " END, C.CATORDER, P.ATTRIBUTES, P.ISKITCHEN, P.ISSERVICE, P.DISPLAY, P.ISVPRICE, P.ISVERPATRIB, P.TEXTTIP, P.WARRANTY, P.SEQUENCEID " +
 			"FROM PRODUCTS P LEFT OUTER JOIN PRODUCTS_CAT C ON P.ID = C.PRODUCT " +
 			"WHERE ?(QBF_FILTER) " +
-			"ORDER BY P.REFERENCE", new String[] {"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE"})
+			"ORDER BY P.REFERENCE", new String[] {"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.SUPPLIERID"})
 		, new SerializerWriteBasic(new Datas[] {Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING})
 		, productsRow.getSerializerRead());
     }
