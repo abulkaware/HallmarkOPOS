@@ -54,6 +54,11 @@ public class JPaymentMagcard extends javax.swing.JPanel implements JPaymentInter
             jlblMessage.setText(null);
             // jlblMessage.setText(AppLocal.getIntString("message.nocardreader"));
         }
+        
+        buttonGroup1.add(jRadioVisa);
+        buttonGroup1.add(jRadioVisaDebit);
+        buttonGroup1.add(jRadioMastercard);
+        
     }
     
     @Override
@@ -101,12 +106,25 @@ public class JPaymentMagcard extends javax.swing.JPanel implements JPaymentInter
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        jRadioMastercard = new javax.swing.JRadioButton();
+        jRadioVisa = new javax.swing.JRadioButton();
+        jRadioVisaDebit = new javax.swing.JRadioButton();
         jlblMessage = new javax.swing.JTextArea();
+        jTextLastDigits = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(310, 60));
+        jPanel1.setMinimumSize(new java.awt.Dimension(380, 160));
+        jPanel1.setPreferredSize(new java.awt.Dimension(310, 160));
+
+        jRadioMastercard.setText("Mastercard");
+
+        jRadioVisa.setText("Visa");
+
+        jRadioVisaDebit.setText("Visa Debit");
 
         jlblMessage.setEditable(false);
         jlblMessage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -115,14 +133,65 @@ public class JPaymentMagcard extends javax.swing.JPanel implements JPaymentInter
         jlblMessage.setFocusable(false);
         jlblMessage.setPreferredSize(new java.awt.Dimension(300, 60));
         jlblMessage.setRequestFocusEnabled(false);
-        jPanel1.add(jlblMessage);
+
+        jTextLastDigits.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+
+        jLabel1.setText("Last 4 digits:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioVisa, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioMastercard, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioVisaDebit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextLastDigits, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioVisaDebit)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jRadioVisa))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jRadioMastercard))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextLastDigits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
+                .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         add(jPanel1, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioMastercard;
+    private javax.swing.JRadioButton jRadioVisa;
+    private javax.swing.JRadioButton jRadioVisaDebit;
+    private javax.swing.JTextField jTextLastDigits;
     private javax.swing.JTextArea jlblMessage;
     // End of variables declaration//GEN-END:variables
     

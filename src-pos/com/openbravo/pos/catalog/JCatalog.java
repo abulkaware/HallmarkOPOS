@@ -424,6 +424,8 @@ public class JCatalog extends JPanel implements ListSelectionListener, CatalogSe
         m_btnBack1 = new javax.swing.JButton();
         m_jProducts = new javax.swing.JPanel();
 
+        setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        setMinimumSize(new java.awt.Dimension(119, 80));
         setLayout(new java.awt.BorderLayout());
 
         m_jCategories.setMaximumSize(new java.awt.Dimension(275, 600));
