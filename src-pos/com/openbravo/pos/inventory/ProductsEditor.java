@@ -277,7 +277,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jComment.setSelected(false);
         m_jScale.setSelected(false);
         m_CategoryModel.setSelectedKey(null);
-        taxcatmodel.setSelectedKey(null);
+        taxcatmodel.setSelectedKey("001"); // there is only one tax rate. This ensures cost price is calculated
         suppliermodel.setSelectedKey(null);
         m_jPriceBuy.setText(null);
         setPriceSell(null);
@@ -924,6 +924,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jInCatalog = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
         m_jName = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        m_jPriceSell = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         m_jstockcost = new javax.swing.JTextField();
@@ -940,7 +942,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel20 = new javax.swing.JLabel();
         m_jVprice = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
-        m_jPriceSell = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         m_jmargin = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -1113,6 +1114,16 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jPanel1.add(jScrollPane3);
         jScrollPane3.setBounds(130, 100, 270, 70);
 
+        jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel33.setText("(ex VAT)");
+        jPanel1.add(jLabel33);
+        jLabel33.setBounds(230, 200, 90, 25);
+
+        m_jPriceSell.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        m_jPriceSell.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jPanel1.add(m_jPriceSell);
+        m_jPriceSell.setBounds(290, 200, 70, 25);
+
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodgeneral"), jPanel1); // NOI18N
 
         jPanel2.setLayout(null);
@@ -1189,11 +1200,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel4.setText(AppLocal.getIntString("label.prodpricesell")); // NOI18N
         jPanel2.add(jLabel4);
         jLabel4.setBounds(230, 180, 100, 25);
-
-        m_jPriceSell.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        m_jPriceSell.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel2.add(m_jPriceSell);
-        m_jPriceSell.setBounds(370, 180, 70, 25);
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1509,6 +1515,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
