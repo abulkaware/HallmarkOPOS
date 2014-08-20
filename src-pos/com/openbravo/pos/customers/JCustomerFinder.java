@@ -124,6 +124,10 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             if (jListCustomers.getModel().getSize() > 0) {
                 jListCustomers.setSelectedIndex(0);
             }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Customer not found.", "Not Found", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (BasicException e) {
         }        
     }

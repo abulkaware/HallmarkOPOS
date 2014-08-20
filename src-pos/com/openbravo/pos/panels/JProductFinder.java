@@ -20,6 +20,7 @@
 package com.openbravo.pos.panels;
 
 import com.openbravo.basic.BasicException;
+import com.openbravo.data.gui.JMessageDialog;
 import com.openbravo.data.user.ListProvider;
 import com.openbravo.data.user.ListProviderCreator;
 import com.openbravo.pos.forms.AppLocal;
@@ -29,6 +30,7 @@ import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.ProductRenderer;
 import java.awt.*;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -277,6 +279,10 @@ public class JProductFinder extends javax.swing.JDialog {
             jListProducts.setModel(new MyListData(lpr.loadData()));
             if (jListProducts.getModel().getSize() > 0) {
                 jListProducts.setSelectedIndex(0);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Stock item not found.", "Not Found", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (BasicException e) {
         }
