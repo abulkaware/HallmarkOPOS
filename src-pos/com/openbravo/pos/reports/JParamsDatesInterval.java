@@ -29,7 +29,11 @@ import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.AppView;
 import java.awt.Component;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JParamsDatesInterval extends javax.swing.JPanel implements ReportEditorCreator {
 
@@ -39,15 +43,33 @@ public class JParamsDatesInterval extends javax.swing.JPanel implements ReportEd
     }
     
     public void setStartDate(Date d) {
-        jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(d));
+        if (d == null)
+        {
+            Calendar c1 = GregorianCalendar.getInstance();
+            c1.setTime(new Date());
+            c1.set(Calendar.HOUR_OF_DAY, 0);
+            c1.set(Calendar.MINUTE, 1);
+            c1.set(Calendar.SECOND, 0);
+            jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(c1.getTime()));
+        }
+        else
+        {
+            jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(d));
+        }
     }
     
     public void setEndDate(Date d) {
-        jTxtEndDate.setText(Formats.TIMESTAMP.formatValue(d));
+        Calendar c1 = GregorianCalendar.getInstance();
+        c1.setTime(d);
+        c1.set(Calendar.HOUR_OF_DAY, 23);
+        c1.set(Calendar.MINUTE, 59);
+        
+        jTxtEndDate.setText(Formats.TIMESTAMP.formatValue(c1.getTime()));
     }
 
     @Override
     public void init(AppView app) {
+        setStartDate(null);
     }
 
     @Override

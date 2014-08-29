@@ -190,7 +190,7 @@ public class PaymentPanelMagCard extends javax.swing.JPanel implements PaymentPa
             }
         });
         jPanel1.add(jReset);
-        jReset.setBounds(310, 20, 90, 30);
+        jReset.setBounds(310, 20, 130, 30);
         jPanel1.add(m_jKeyFactory);
         m_jKeyFactory.setBounds(0, 0, 0, 0);
 
