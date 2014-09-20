@@ -1059,7 +1059,7 @@ public class JPaneldbMigrate extends JPanel implements JPanelView {
         SQL ="SELECT * FROM TICKETLINES";         
         rs = stmt.executeQuery(SQL);
         while (rs.next()){
-            SQL="INSERT INTO TICKETLINES (TICKET, LINE, PRODUCT, ATTRIBUTESETINSTANCE_ID, UNITS, PRICE, TAXID, ATTRIBUTES, WORKSHOPTICKET, COLLECTEDBY, NOTES) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            SQL="INSERT INTO TICKETLINES (TICKET, LINE, PRODUCT, ATTRIBUTESETINSTANCE_ID, UNITS, PRICE, TAXID, ATTRIBUTES, WORKSHOPTICKET, COLLECTEDBY, NOTES, COSTPRICE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstmt = con2.prepareStatement(SQL);    
             pstmt.setString(1,rs.getString("TICKET")); 
             pstmt.setInt(2,rs.getInt("LINE")); 
@@ -1072,6 +1072,7 @@ public class JPaneldbMigrate extends JPanel implements JPanelView {
             pstmt.setString(9,rs.getString("WORKSHOPTICKET"));
             pstmt.setString(10, rs.getString("COLLECTEDBY"));
             pstmt.setString(11, rs.getString("NOTES"));
+            pstmt.setDouble(12, rs.getDouble("COSTPRICE"));
             pstmt.executeUpdate();   
         }        
         

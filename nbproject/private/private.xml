@@ -5,29 +5,39 @@
         <group>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/PaymentPanelFac.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/PaymentPanelBasic.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JPanelButtons.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/reports/com/openbravo/reports/sales_hallmark.bs</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentSelect.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/PaymentPanel.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentCheque.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/reports/JParamsDatesInterval.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentDebt.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/gui/JSaver.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/catalog/JProductsSelector.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentPaper.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentSelectCustomer.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentMagcard.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/forms/DataLogicSystem.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ProductsPanel.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/forms/DataLogicSales.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JProductFinder.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/forms/JPanelMenu.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentCashPos.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/ticket/TicketLineInfo.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/JPanelTicket.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentSelectReceipt.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/shared/JTicketsBagShared.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/JCustomerFinder.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/reports/ReportEditorCreator.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/printer/DeviceTicket.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/SupplierStockItem.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/customers/CustomersPanel.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentInterface.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentSelectRefund.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-data/com/openbravo/data/gui/JNavigator.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/PaymentPanelMagCard.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentRefund.java</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/JPanelCloseMoney.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/reports/com/openbravo/reports/productsales.bs</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/sales/DataLogicReceipts.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/locales/pos_messages.properties</file>
@@ -36,6 +46,7 @@
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/NewOkCancelDialog.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/inventory/ProductsEditor.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/reports/com/openbravo/reports/productsales.jrxml</file>
+            <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/panels/PaymentsModel.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/PaymentPanelType.java</file>
             <file>file:/Users/charlesbell/Desktop/unicenta_356_source/src-pos/com/openbravo/pos/payment/JPaymentFree.java</file>
         </group>

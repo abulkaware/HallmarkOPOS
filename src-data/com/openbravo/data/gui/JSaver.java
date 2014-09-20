@@ -127,7 +127,7 @@ public class JSaver extends JPanel implements StateListener {
         try {
             m_bd.saveData();
         } catch (BasicException eD) {
-            MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nosave"), eD);
+            MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nosave") + " " + eD.getMessage(), eD);
             msg.show(this);
         }          
     }//GEN-LAST:event_jbtnSaveActionPerformed
@@ -150,7 +150,7 @@ public class JSaver extends JPanel implements StateListener {
         try {
             m_bd.actionInsert();
         } catch (BasicException eD) {
-            MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nonew"), eD);
+            MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, LocalRes.getIntString("message.nonew") + " " + eD.getMessage(), eD);
             msg.show(this);
         }
     }//GEN-LAST:event_jbtnNewActionPerformed
