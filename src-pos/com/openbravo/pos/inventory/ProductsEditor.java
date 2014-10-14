@@ -196,7 +196,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         setPriceSell(null);
         m_jImage.setImage(null);
         m_jstockcost.setText(null);
-        m_jstockvolume.setText(null);
+        m_jstockvolume.setText("0");
         m_jInCatalog.setSelected(false);
         m_jCatalogOrder.setText(null);
         txtAttributes.setText(null);
@@ -283,7 +283,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         setPriceSell(null);
         m_jImage.setImage(null);
         m_jstockcost.setText(null);
-        m_jstockvolume.setText(null);
+        m_jstockvolume.setText("0");
         m_jInCatalog.setSelected(true);
         m_jCatalogOrder.setText(null);
         txtAttributes.setText(null);
@@ -369,6 +369,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setImage((BufferedImage) myprod[11]);
         m_jstockcost.setText(Formats.CURRENCY.formatValue(myprod[12]));
         m_jstockvolume.setText(Formats.DOUBLE.formatValue(myprod[13]));
+        
         m_jInCatalog.setSelected(((Boolean)myprod[14]).booleanValue());
         m_jCatalogOrder.setText(Formats.INT.formatValue(myprod[15]));
         txtAttributes.setText(Formats.BYTEA.formatValue(myprod[16]));
@@ -457,6 +458,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jImage.setImage((BufferedImage) myprod[11]);
         m_jstockcost.setText(Formats.CURRENCY.formatValue(myprod[12]));
         m_jstockvolume.setText(Formats.DOUBLE.formatValue(myprod[13]));
+        if (m_jstockvolume.getText().length() == 0)
+        {
+            m_jstockvolume.setText("0");
+        }
         m_jInCatalog.setSelected(((Boolean)myprod[14]).booleanValue());
         m_jCatalogOrder.setText(Formats.INT.formatValue(myprod[15]));
         txtAttributes.setText(Formats.BYTEA.formatValue(myprod[16]));
@@ -545,7 +550,7 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         myprod[10] = suppliermodel.getSelectedKey();
         myprod[11] = m_jImage.getImage();
         myprod[12] = Formats.CURRENCY.parseValue(m_jstockcost.getText());
-        myprod[13] = Formats.DOUBLE.parseValue(m_jstockvolume.getText());
+        myprod[13] = m_jstockvolume.getText().length() == 0 ? 0d : Formats.DOUBLE.parseValue(m_jstockvolume.getText());
         myprod[14] = Boolean.valueOf(m_jInCatalog.isSelected());
         myprod[15] = Formats.INT.parseValue(m_jCatalogOrder.getText());
         myprod[16] = Formats.BYTEA.parseValue(txtAttributes.getText());
@@ -986,12 +991,8 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jPanel1.setLayout(null);
-
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText(AppLocal.getIntString("label.prodref")); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 40, 65, 25);
 
         m_jRef.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jRef.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -999,32 +1000,19 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
                 m_jRefFocusLost(evt);
             }
         });
-        jPanel1.add(m_jRef);
-        m_jRef.setBounds(130, 40, 80, 25);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText(AppLocal.getIntString("label.prodbarcode")); // NOI18N
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 70, 110, 25);
 
         m_jCode.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel1.add(m_jCode);
-        m_jCode.setBounds(130, 70, 170, 25);
 
         m_jCodetype.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jPanel1.add(m_jCodetype);
-        m_jCodetype.setBounds(310, 70, 90, 25);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText(bundle.getString("label.prodname")); // NOI18N
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 100, 90, 25);
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText(AppLocal.getIntString("label.catname")); // NOI18N
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 10, 110, 25);
-        jLabel5.getAccessibleContext().setAccessibleName(bundle.getString("label.catname")); // NOI18N
 
         m_jCategory.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         m_jCategory.addItemListener(new java.awt.event.ItemListener() {
@@ -1032,23 +1020,14 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
                 categorySelected(evt);
             }
         });
-        jPanel1.add(m_jCategory);
-        m_jCategory.setBounds(130, 10, 170, 25);
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText(AppLocal.getIntString("label.supplier")); // NOI18N
-        jPanel1.add(jLabel13);
-        jLabel13.setBounds(10, 170, 110, 25);
 
         m_jSupp.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jPanel1.add(m_jSupp);
-        m_jSupp.setBounds(130, 170, 300, 25);
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setText(AppLocal.getIntString("label.prodpriceselltax")); // NOI18N
-        jPanel1.add(jLabel16);
-        jLabel16.setBounds(10, 200, 90, 25);
-        jLabel16.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpriceselltax")); // NOI18N
 
         m_jPriceSellTax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jPriceSellTax.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -1057,39 +1036,23 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
                 m_jPriceSellTaxActionPerformed(evt);
             }
         });
-        jPanel1.add(m_jPriceSellTax);
-        m_jPriceSellTax.setBounds(130, 200, 80, 25);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText(AppLocal.getIntString("label.prodpricebuy")); // NOI18N
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 230, 80, 25);
-        jLabel3.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpricebuy")); // NOI18N
 
         m_jPriceBuy.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jPriceBuy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(m_jPriceBuy);
-        m_jPriceBuy.setBounds(130, 230, 80, 25);
 
         m_jRefSequenceId.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel1.add(m_jRefSequenceId);
-        m_jRefSequenceId.setBounds(230, 40, 80, 25);
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setText(AppLocal.getIntString("label.prodstockvol")); // NOI18N
-        jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 260, 120, 25);
 
         m_jstockvolume.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         m_jstockvolume.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(m_jstockvolume);
-        m_jstockvolume.setBounds(130, 260, 80, 25);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText(AppLocal.getIntString("label.prodincatalog")); // NOI18N
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(10, 290, 110, 25);
-        jLabel8.getAccessibleContext().setAccessibleName(bundle.getString("label.prodincatalog")); // NOI18N
 
         m_jInCatalog.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         m_jInCatalog.setSelected(true);
@@ -1098,8 +1061,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
                 m_jInCatalogActionPerformed(evt);
             }
         });
-        jPanel1.add(m_jInCatalog);
-        m_jInCatalog.setBounds(130, 290, 30, 25);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -1111,18 +1072,114 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jName.setNextFocusableComponent(m_jSupp);
         jScrollPane3.setViewportView(m_jName);
 
-        jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(130, 100, 270, 70);
-
         jLabel33.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel33.setText("(ex VAT)");
-        jPanel1.add(jLabel33);
-        jLabel33.setBounds(230, 200, 90, 25);
 
         m_jPriceSell.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jPriceSell.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(m_jPriceSell);
-        m_jPriceSell.setBounds(290, 200, 70, 25);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(m_jCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(m_jRef, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(m_jRefSequenceId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(m_jCode, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(m_jCodetype, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(m_jSupp, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(m_jPriceSellTax, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(m_jPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(m_jPriceBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(m_jstockvolume, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(m_jInCatalog, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jRef, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jRefSequenceId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jCodetype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jSupp, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jPriceSellTax, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jPriceBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jstockvolume, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m_jInCatalog, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jLabel5.getAccessibleContext().setAccessibleName(bundle.getString("label.catname")); // NOI18N
+        jLabel16.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpriceselltax")); // NOI18N
+        jLabel3.getAccessibleContext().setAccessibleName(bundle.getString("label.prodpricebuy")); // NOI18N
+        jLabel8.getAccessibleContext().setAccessibleName(bundle.getString("label.prodincatalog")); // NOI18N
 
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodgeneral"), jPanel1); // NOI18N
 

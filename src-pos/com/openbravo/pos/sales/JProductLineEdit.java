@@ -98,7 +98,7 @@ public class JProductLineEdit extends javax.swing.JDialog {
         
         m_jCostPrice.setDoubleValue(oLine.getCostPrice());
         m_jCostPrice.addEditorKeys(m_jKeys);
-        m_jCollectedBy.addPropertyChangeListener("Edition", new StoreCostPrice());
+        m_jCostPrice.addPropertyChangeListener("Edition", new StoreCostPrice());
         
         m_jUnits.activate();
         

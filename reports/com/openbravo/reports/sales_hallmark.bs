@@ -23,7 +23,7 @@ report.setTitleKey("Menu.SalesManagement");
 report.setReport("/com/openbravo/reports/sales_hallmark");
 report.setResourceBundle("com/openbravo/reports/products_messages");
 
-report.setSentence("select TICKET, REFERENCE, PRODUCTS.NAME AS PRODUCTNAME, UNITS, PRICE, COSTPRICE, (units * price) as LINENET, (units * costprice) as LINECOST, TAXCAT, PEOPLE.NAME AS PERSONNAME, DATENEW " +
+report.setSentence("select TICKET, REFERENCE, PRODUCTS.NAME AS PRODUCTNAME, UNITS, PRICE, CASE COSTPRICE WHEN 0.0 THEN PRODUCTS.PRICEBUY ELSE COSTPRICE END AS COSTPRICE, (units * price) as LINENET, CASE COSTPRICE WHEN 0.0 THEN (units * PRODUCTS.PRICEBUY) ELSE (units * COSTPRICE) END as LINECOST, TAXCAT, PEOPLE.NAME AS PERSONNAME, DATENEW " +
                    " from receipts, tickets, ticketlines, products, people " +
                    " where receipts.id = tickets.id and tickets.id = ticketlines.ticket and ticketlines.product = products.id and tickets.person = people.id " +
                    " AND ?(QBF_FILTER) " +
