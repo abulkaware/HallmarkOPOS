@@ -74,8 +74,8 @@ public class JTicketsBagShared extends JTicketsBag {
         
         m_sCurrentTicket = null;
         m_panelticket.setActiveTicket(null, null);       
-        m_jNewTicket.setVisible(false);
-        m_jListTickets.setVisible(false);
+        //m_jNewTicket.setVisible(false);
+        //m_jListTickets.setVisible(false);
         return true;
         
         // postcondicion es que no tenemos ticket activado ni ticket en el panel
