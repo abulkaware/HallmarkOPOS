@@ -862,6 +862,11 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 SerializerReadString.INSTANCE).find(id)
             != null;
     }
+    
+    public final void addOneStock(String id) throws BasicException {
+        new StaticSentence(s, "UPDATE PRODUCTS SET STOCKVOLUME = STOCKVOLUME+1 WHERE ID = '" + id + "'").exec();
+        
+    }
 
     public final TicketInfo loadTicket(final int tickettype, final int ticketid) throws BasicException {
         TicketInfo ticket = (TicketInfo) new PreparedSentence(s
