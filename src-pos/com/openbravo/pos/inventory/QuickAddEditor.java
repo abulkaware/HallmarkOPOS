@@ -116,12 +116,12 @@ jProductCode.getDocument().addDocumentListener(new ProductCodeManager());
                 }
                 else
                 {
-                    int dialogResult = JOptionPane.showConfirmDialog(this, "Add one " + jProductCode.getText().toUpperCase() + " to stock?");
+                    int dialogResult = JOptionPane.showConfirmDialog(this, "Add one " + prod.getName() + " to stock?");
                     if (dialogResult == JOptionPane.YES_OPTION)
                     {
                         
                         dlSales.addOneStock(prod.getID());
-                        JOptionPane.showMessageDialog(this, "Added one.");
+                        JOptionPane.showMessageDialog(this, "Stock level updated.");
                     }
                 }
                 Runnable doClearText = new Runnable() {
