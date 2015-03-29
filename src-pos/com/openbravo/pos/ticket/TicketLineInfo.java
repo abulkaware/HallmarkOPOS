@@ -49,33 +49,34 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
     private String collectedBy;
     private String notes;
     private double costPrice;
+    private String reference;
 
     /** Creates new TicketLineInfo */
-    public TicketLineInfo(String productid, double dMultiply, double dPrice, TaxInfo tax, Properties props, String workshopTicket, String collectedBy, String notes, double costPrice) {
-        init(productid, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice);
+    public TicketLineInfo(String productid, double dMultiply, double dPrice, TaxInfo tax, Properties props, String workshopTicket, String collectedBy, String notes, double costPrice, String reference) {
+        init(productid, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice, reference);
     }
 
-    public TicketLineInfo(String productid, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice) {
-        init(productid, null, dMultiply, dPrice, tax, new Properties(), workshopTicket, collectedBy, notes, costPrice);
+    public TicketLineInfo(String productid, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice, String reference) {
+        init(productid, null, dMultiply, dPrice, tax, new Properties(), workshopTicket, collectedBy, notes, costPrice, reference);
     }
 
-    public TicketLineInfo(String productid, String productname, String producttaxcategory, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice) {
+    public TicketLineInfo(String productid, String productname, String producttaxcategory, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice, String reference) {
         Properties props = new Properties();
         props.setProperty("product.name", productname);
         props.setProperty("product.taxcategoryid", producttaxcategory);
-        init(productid, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice);
+        init(productid, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice, reference);
     }
 
-    public TicketLineInfo(String productname, String producttaxcategory, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice) {
+    public TicketLineInfo(String productname, String producttaxcategory, double dMultiply, double dPrice, TaxInfo tax, String workshopTicket, String collectedBy, String notes, double costPrice, String reference) {
 
         Properties props = new Properties();
         props.setProperty("product.name", productname);
         props.setProperty("product.taxcategoryid", producttaxcategory);
-        init(null, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice);
+        init(null, null, dMultiply, dPrice, tax, props, workshopTicket, collectedBy, notes, costPrice, reference);
     }
 
     public TicketLineInfo() {
-        init(null, null, 0.0, 0.0, null, new Properties(), null, null, null, 0.0);
+        init(null, null, 0.0, 0.0, null, new Properties(), null, null, null, 0.0, null);
     }
 
     public TicketLineInfo(ProductInfoExt product, double dMultiply, double dPrice, TaxInfo tax, Properties attributes, String workshopTicket, String collectedBy, String notes, double costPrice) {
@@ -121,7 +122,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
                 attributes.setProperty("product.categoryid", product.getCategoryID());
             }
         }
-        init(pid, null, dMultiply, dPrice, tax, attributes, workshopTicket, collectedBy, notes, costPrice);
+        init(pid, null, dMultiply, dPrice, tax, attributes, workshopTicket, collectedBy, notes, costPrice, product.m_sRef);
     }
 
     public TicketLineInfo(ProductInfoExt oProduct, double dPrice, TaxInfo tax, Properties attributes, String workshopTicket, String collectedBy, String notes, double costPrice) {
@@ -129,10 +130,10 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
     }
 
     public TicketLineInfo(TicketLineInfo line) {
-        init(line.productid, line.attsetinstid, line.multiply, line.price, line.tax, (Properties) line.attributes.clone(), line.workshopTicket, line.collectedBy, line.notes, line.costPrice);
+        init(line.productid, line.attsetinstid, line.multiply, line.price, line.tax, (Properties) line.attributes.clone(), line.workshopTicket, line.collectedBy, line.notes, line.costPrice, line.reference);
     }
 
-    private void init(String productid, String attsetinstid, double dMultiply, double dPrice, TaxInfo tax, Properties attributes, String workshopTicket, String collectedBy, String notes, double costPrice) {
+    private void init(String productid, String attsetinstid, double dMultiply, double dPrice, TaxInfo tax, Properties attributes, String workshopTicket, String collectedBy, String notes, double costPrice, String reference) {
 
         this.productid = productid;
         this.attsetinstid = attsetinstid;
@@ -144,6 +145,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         this.collectedBy = collectedBy;
         this.notes = notes;
         this.costPrice = costPrice;
+        this.reference = reference;
 
         m_sTicket = null;
         m_iLine = -1;
@@ -178,6 +180,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         dp.setString(10, collectedBy);
         dp.setString(11, notes);
         dp.setDouble(12, new Double(costPrice));
+        dp.setString(13, reference);
     }
 
     @Override
@@ -209,6 +212,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         collectedBy = dr.getString(17);
         notes = dr.getString(18);
         costPrice = dr.getDouble(19);
+        reference = dr.getString(20);
     }
 
     public TicketLineInfo copyTicketLine() {
@@ -224,6 +228,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         l.collectedBy = collectedBy;
         l.notes = notes;
         l.costPrice = costPrice;
+        l.reference = reference;
         l.attributes = (Properties) attributes.clone();
         return l;
     }
@@ -391,7 +396,13 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
     }
 
     public String printName() {
-        return StringUtils.encodeXML(attributes.getProperty("product.name"));
+        //CB: putting in catch to ensure reference (e.g. GC0001) is printed on receipt.
+        String productName = StringUtils.encodeXML(attributes.getProperty("product.name"));
+        if (productName.startsWith(reference) == false)
+        {
+            return reference + " - " + productName;
+        }
+        return productName;
     }
 
     public String printMultiply() {
