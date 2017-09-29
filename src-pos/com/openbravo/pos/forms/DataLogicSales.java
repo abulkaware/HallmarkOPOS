@@ -1369,10 +1369,10 @@ public void writeValues() throws BasicException {
     public final Integer findNextProductCategorySequence(String categoryId) throws BasicException {
         
         PreparedSentence p = new PreparedSentence(s, "select max(p.sequenceid) + 1"
-                + "from products p where p.category = ?"
-                , new SerializerWriteBasic(Datas.STRING, Datas.STRING)
+                + " from products p where p.category = ?"
+                , SerializerWriteString.INSTANCE
                 , SerializerReadInteger.INSTANCE);
-        Integer next = (Integer)p.find(categoryId, categoryId);
+        Integer next = (Integer)p.find(categoryId);
         return next == null ? 0 : next;
     }
 
