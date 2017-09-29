@@ -899,7 +899,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                     : loadCustomerExt(customerid));
 
             ticket.setLines(new PreparedSentence(s
-                , "SELECT L.TICKET, L.LINE, L.PRODUCT, L.ATTRIBUTESETINSTANCE_ID, L.UNITS, L.PRICE, T.ID, T.NAME, T.CATEGORY, T.CUSTCATEGORY, T.PARENTID, T.RATE, T.RATECASCADE, T.RATEORDER, L.ATTRIBUTES, L.WORKSHOPTICKET, L.COLLECTEDBY, L.NOTES, L.COSTPRICE, L.REFERENCE " +
+                , "SELECT L.TICKET, L.LINE, L.PRODUCT, L.ATTRIBUTESETINSTANCE_ID, L.UNITS, L.PRICE, T.ID, T.NAME, T.CATEGORY, T.CUSTCATEGORY, T.PARENTID, T.RATE, T.RATECASCADE, T.RATEORDER, L.ATTRIBUTES, L.WORKSHOPTICKET, L.COLLECTEDBY, L.NOTES, L.COSTPRICE, L.STOCKREF " +
                   "FROM TICKETLINES L, TAXES T WHERE L.TAXID = T.ID AND L.TICKET = ? ORDER BY L.LINE"
                 , SerializerWriteString.INSTANCE
                 , new SerializerReadClass(TicketLineInfo.class)).list(ticket.getId()));
@@ -980,7 +980,7 @@ public Object transact() throws BasicException {
             );
 
     SentenceExec ticketlineinsert = new PreparedSentence(s
-        , "INSERT INTO TICKETLINES (TICKET, LINE, PRODUCT, ATTRIBUTESETINSTANCE_ID, UNITS, PRICE, TAXID, ATTRIBUTES, WORKSHOPTICKET, COLLECTEDBY, NOTES, COSTPRICE, REFERENCE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        , "INSERT INTO TICKETLINES (TICKET, LINE, PRODUCT, ATTRIBUTESETINSTANCE_ID, UNITS, PRICE, TAXID, ATTRIBUTES, WORKSHOPTICKET, COLLECTEDBY, NOTES, COSTPRICE, STOCKREF) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         , SerializerWriteBuilder.INSTANCE);
   
     for (TicketLineInfo l : ticket.getLines()) {
@@ -1368,17 +1368,12 @@ public void writeValues() throws BasicException {
     
     public final Integer findNextProductCategorySequence(String categoryId) throws BasicException {
         
-        PreparedSentence p = new PreparedSentence(s, "select SQL_NO_CACHE p.sequenceid + 1"
-                + " from products p where p.category = ?"
-                + " and NOT EXISTS ("
-                + " select pi.sequenceid from products pi"
-                + " where pi.sequenceid = p.sequenceid + 1 and pi.category = ? )"
-                + " order by p.sequenceid limit 1"
+        PreparedSentence p = new PreparedSentence(s, "select max(p.sequenceid) + 1"
+                + "from products p where p.category = ?"
                 , new SerializerWriteBasic(Datas.STRING, Datas.STRING)
                 , SerializerReadInteger.INSTANCE);
         Integer next = (Integer)p.find(categoryId, categoryId);
         return next == null ? 0 : next;
-        //CB: id in this case is the category id
     }
 
     public final SentenceExec getCatalogCategoryAdd() {
