@@ -1537,7 +1537,10 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
                 } catch (BasicException ex) {}
 
                 m_jRefSequenceId.setText(nextId.toString());
-                String formattedId = String.format("%s%04d", shortCode, nextId);
+                String format = "%s%04d";
+                if (nextId > 9999)
+                    format = "%s%05d";
+                String formattedId = String.format(format, shortCode, nextId);
                 m_jRef.setText(formattedId);
             }
         
